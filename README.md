@@ -7,8 +7,7 @@ Inbound prompt-injection and context-integrity firewall for AI agents. The Next.
 1. Configure AWS credentials locally, then deploy `aws/` with CDK: `cd aws && pnpm install && pnpm deploy -c vercelTeam=TEAM_ID -c vercelProject=PROJECT_ID`.
 2. Put the OpenAI key in the generated `OpenAIKey` secret. The probe token is generated and injected into ECS automatically.
 3. Copy the stack outputs into Vercel project variables using `.env.example` as the complete list. `AWS_ROLE_ARN` is the stack's Vercel OIDC role, so no long-lived AWS access key is required.
-4. Set `AUTH_SECRET`, `AUTH_URL`, `GMAIL_USER`, `GMAIL_APP_PASSWORD`, and `EMAIL_FROM`. Gmail requires 2-step verification and an App Password. Never use the normal Gmail password.
-5. Deploy the Next.js project to Vercel. The Fargate probe must be healthy and running for scans to work; scans fail closed when the probe or LLM judge is unavailable.
+4. Deploy the Next.js project to Vercel. The Fargate probe must be healthy and running for scans to work; scans fail closed when the probe or LLM judge is unavailable.
 
 ## Environment variables
 
@@ -16,7 +15,7 @@ See `.env.example`. AWS resource names and URLs come from CDK outputs. `OPENAI_S
 
 ## Security architecture
 
-Every scan executes all three detectors concurrently: TypeScript heuristic (35%), OpenAI LLM judge (40%), and private DeBERTa activation probe (25%). Risk `>= 0.62` blocks. API keys are SHA-256 hashed, auth tokens expire through DynamoDB TTL, uploads use five-minute presigned S3 PUTs, SQS has a DLQ, and IAM grants Vercel/Lambda only the resources each needs.
+Every scan executes all three detectors concurrently: TypeScript heuristic (35%), OpenAI LLM judge (40%), and private DeBERTa activation probe (25%). Risk `>= 0.62` blocks. API keys are SHA-256 hashed when configured, uploads use five-minute presigned S3 PUTs, SQS has a DLQ, and IAM grants Vercel/Lambda only the resources each needs.
 
 ## API
 
@@ -27,7 +26,7 @@ Every scan executes all three detectors concurrently: TypeScript heuristic (35%)
 - `POST /api/v1/uploads`
 - `GET /api/v1/examples`
 
-Developer endpoints accept `Authorization: Bearer ag_live_...`. The public playground intentionally accesses only the synchronous scan and action routes; production teams should place additional abuse controls in front of public traffic.
+Developer endpoints accept `Authorization: Bearer ag_live_...` when API keys are configured. The console and playground are publicly accessible; production teams should place additional abuse controls in front of public traffic.
 
 ## Non-goals
 
