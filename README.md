@@ -2,6 +2,51 @@
 
 Inbound prompt-injection and context-integrity firewall for AI agents. The Next.js app runs on Vercel; AWS provides DynamoDB, S3, SQS/Lambda, Secrets Manager, and a required private Fargate activation-probe service.
 
+**OpenAI Build Week · Developer Tools**
+[Live demo](https://agentguard-jade.vercel.app) · [Python SDK](sdk/python) · [Devpost submission copy](docs/devpost-submission.md) · [Demo script](docs/demo-script.md)
+
+## Why AgentGuard
+
+AI agents routinely ingest web pages, documents, tool results, and MCP output
+that their developers do not control. Prompt injection hidden in that content
+can redirect tools, steal context, or override policy. AgentGuard gives agent
+developers one boundary to call before untrusted text enters model context.
+
+Each synchronous decision combines:
+
+- deterministic injection signatures;
+- a GPT-5.6 semantic judge;
+- an independent activation-style probe;
+- a versioned workspace policy with fail-closed behavior.
+
+The result is a typed verdict with risk, detector evidence, sanitized text, and
+policy provenance—not a generic moderation label.
+
+```mermaid
+flowchart LR
+    U[Untrusted content] --> A[AgentGuard]
+    A --> H[Heuristic]
+    A --> G[GPT-5.6 judge]
+    A --> P[Activation probe]
+    H --> E[Policy engine]
+    G --> E
+    P --> E
+    E -->|allow| C[Agent context]
+    E -->|block| Q[Evidence and review]
+```
+
+## Build Week implementation
+
+GPT-5.6 Sol was the primary coding agent used to turn the concept into the
+working MVP: the scanner UI, provider routing, policy engine, Python SDK,
+AWS batch path, tests, and submission assets. The builder directed product and
+security decisions and used agent-driven repository exploration, implementation,
+testing, deployment hardening, and documentation.
+
+For judging, the fastest path is the [live scanner](https://agentguard-jade.vercel.app/#scanner).
+The repository also contains a locally installable, dependency-free Python SDK
+and sample attack inputs under `/api/v1/examples`.
+
 ## Python quickstart
 
 Install the dependency-free SDK from this checkout:
@@ -15,7 +60,7 @@ Run the web service locally with a detector provider configured:
 ```bash
 export PROVIDER_MODE=openrouter
 export OPENROUTER_API_KEY=sk-or-v1-...
-export OPENROUTER_MODEL=openai/gpt-4.1-mini
+export OPENROUTER_MODEL=openai/gpt-5.6
 pnpm install
 pnpm dev
 ```

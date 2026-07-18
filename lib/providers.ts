@@ -103,8 +103,8 @@ function directCandidate(provider: Exclude<ProviderName, 'aws'>, settings: Provi
   const apiKey = workspaceKey || environmentKey
   if (!apiKey) return null
   const model = provider === 'openai'
-    ? settings.openaiModel || process.env.OPENAI_MODEL || 'gpt-4.1-mini'
-    : settings.openrouterModel || process.env.OPENROUTER_MODEL || 'openai/gpt-4.1-mini'
+    ? settings.openaiModel || process.env.OPENAI_MODEL || 'gpt-5.6'
+    : settings.openrouterModel || process.env.OPENROUTER_MODEL || 'openai/gpt-5.6'
   return { provider, apiKey, model, credentialSource: workspaceKey ? 'workspace' as const : 'environment' as const }
 }
 
@@ -141,8 +141,8 @@ export async function getProviderStatus(workspaceId: string) {
   const settings = await getProviderSettings(workspaceId)
   return {
     mode: settings.mode,
-    openai: { configured: Boolean(settings.openai || process.env.OPENAI_API_KEY), suffix: settings.openai?.suffix, source: settings.openai ? 'workspace' : process.env.OPENAI_API_KEY ? 'environment' : null, model: settings.openaiModel || process.env.OPENAI_MODEL || 'gpt-4.1-mini' },
-    openrouter: { configured: Boolean(settings.openrouter || process.env.OPENROUTER_API_KEY), suffix: settings.openrouter?.suffix, source: settings.openrouter ? 'workspace' : process.env.OPENROUTER_API_KEY ? 'environment' : null, model: settings.openrouterModel || process.env.OPENROUTER_MODEL || 'openai/gpt-4.1-mini' },
+    openai: { configured: Boolean(settings.openai || process.env.OPENAI_API_KEY), suffix: settings.openai?.suffix, source: settings.openai ? 'workspace' : process.env.OPENAI_API_KEY ? 'environment' : null, model: settings.openaiModel || process.env.OPENAI_MODEL || 'gpt-5.6' },
+    openrouter: { configured: Boolean(settings.openrouter || process.env.OPENROUTER_API_KEY), suffix: settings.openrouter?.suffix, source: settings.openrouter ? 'workspace' : process.env.OPENROUTER_API_KEY ? 'environment' : null, model: settings.openrouterModel || process.env.OPENROUTER_MODEL || 'openai/gpt-5.6' },
     fallbackOrder: ['openai', 'openrouter', 'aws'],
   }
 }

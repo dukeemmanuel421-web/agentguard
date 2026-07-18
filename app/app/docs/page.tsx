@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 
 const openrouter=`export PROVIDER_MODE=openrouter
 export OPENROUTER_API_KEY=sk-or-v1-...
-export OPENROUTER_MODEL=openai/gpt-4.1-mini
+export OPENROUTER_MODEL=openai/gpt-5.6
 
 pnpm dev`
 
