@@ -1,6 +1,9 @@
-import { describe, expect, it } from 'vitest'
-import { evaluatePolicy, defaultPolicy } from './policy'
+import { describe, expect, it, vi } from 'vitest'
+import { evaluatePolicy, defaultPolicy, getActivePolicy } from './policy'
 import type { DetectorResult } from './contracts'
+
+const {listByWorkspace}=vi.hoisted(()=>({listByWorkspace:vi.fn()}))
+vi.mock('@/lib/workspace',()=>({listByWorkspace}))
 
 const detector = (risk: number): DetectorResult => ({ risk, findings: [], latency_ms: 0 })
 
@@ -36,5 +39,18 @@ describe('evaluatePolicy', () => {
 
     expect(result.blocked).toBe(true)
     expect(result.reason).toMatch(/Blocked phrase/)
+  })
+
+  it('loads the newest active workspace policy', async () => {
+    listByWorkspace.mockResolvedValueOnce([
+      {...defaultPolicy,id:'older',version:2,threshold:.7},
+      {...defaultPolicy,id:'newest',version:4,threshold:.8},
+      {...defaultPolicy,id:'draft',version:5,status:'draft'},
+    ])
+
+    const policy=await getActivePolicy('public')
+
+    expect(policy.id).toBe('newest')
+    expect(policy.threshold).toBe(.8)
   })
 })

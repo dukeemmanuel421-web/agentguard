@@ -1,1 +1,1 @@
-{"name":"agentguard-aws","private":true,"scripts":{"synth":"cdk synth","deploy":"cdk deploy"},"devDependencies":{"aws-cdk-lib":"^2.261.0","constructs":"^10.7.0","tsx":"^4.20.0"}}
+{"name":"agentguard-aws","private":true,"scripts":{"synth":"cdk synth","deploy":"cdk deploy"},"devDependencies":{"aws-cdk":"^2.1132.0","aws-cdk-lib":"^2.261.0","constructs":"^10.7.0","esbuild":"^0.28.1","tsx":"^4.20.0"}}

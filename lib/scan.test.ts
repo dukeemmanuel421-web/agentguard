@@ -12,6 +12,7 @@ vi.mock('@/lib/aws', () => ({
 const lowRiskDetector: DetectorResult = { risk: 0.05, findings: [], latency_ms: 1 }
 
 vi.mock('@/lib/providers', () => ({
+  getProviderSettings: vi.fn(async () => ({ mode: 'auto' })),
   runDirectDetectorFallback: vi.fn(async () => ({
     llm: lowRiskDetector,
     probe: lowRiskDetector,
