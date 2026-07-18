@@ -14,6 +14,6 @@ export function assertSameOrigin(request:Request){
  if(['GET','HEAD','OPTIONS'].includes(request.method))return true
  const origin=request.headers.get('origin')
  if(!origin)return false
- const expected=new URL(process.env.AUTH_URL||request.url).origin
+ const expected=new URL(process.env.NEXTAUTH_URL||process.env.AUTH_URL||request.url).origin
  return origin===expected
 }
