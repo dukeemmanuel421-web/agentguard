@@ -86,6 +86,26 @@ The client also reads `AGENTGUARD_BASE_URL` and `AGENTGUARD_API_KEY` from the
 environment. Public scans and action checks are keyless in the MVP; uploads,
 batch scans, and job results require an API key.
 
+## OpenClaw plugin
+
+AgentGuard can run automatically inside OpenClaw workflows. The plugin scans
+prompts before model ingestion, blocks unsafe tool calls, and sanitizes tool
+results before OpenClaw or Codex adds them to context.
+
+```bash
+cd plugins/openclaw
+pnpm install --frozen-lockfile
+pnpm build
+pnpm pack
+openclaw plugins install npm-pack:./agentguard-openclaw-0.1.0.tgz --force
+openclaw plugins enable agentguard
+openclaw gateway restart
+```
+
+Set `AGENTGUARD_BASE_URL` and `AGENTGUARD_API_KEY` in the Gateway environment.
+See [`plugins/openclaw/README.md`](plugins/openclaw/README.md) for configuration,
+verification, local linking, and fail-closed behavior.
+
 ## Deploy
 
 1. Configure AWS credentials locally, then deploy `aws/` with CDK: `cd aws && pnpm install && pnpm deploy -c vercelTeam=TEAM_ID -c vercelProject=PROJECT_ID`.

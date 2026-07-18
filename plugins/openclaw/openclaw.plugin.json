@@ -1,0 +1,62 @@
+{
+  "id": "agentguard",
+  "name": "AgentGuard",
+  "description": "Scans prompts, tool results, and tool calls before OpenClaw trusts them.",
+  "activation": {
+    "onStartup": true
+  },
+  "contracts": {
+    "agentToolResultMiddleware": ["openclaw", "codex"]
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "baseUrl": {
+        "type": "string",
+        "format": "uri",
+        "description": "AgentGuard deployment URL"
+      },
+      "apiKey": {
+        "type": "string",
+        "description": "Optional AgentGuard API key"
+      },
+      "failClosed": {
+        "type": "boolean",
+        "default": true
+      },
+      "scanPrompts": {
+        "type": "boolean",
+        "default": true
+      },
+      "scanToolResults": {
+        "type": "boolean",
+        "default": true
+      },
+      "checkToolCalls": {
+        "type": "boolean",
+        "default": true
+      },
+      "timeoutMs": {
+        "type": "integer",
+        "minimum": 1000,
+        "maximum": 60000,
+        "default": 15000
+      }
+    }
+  },
+  "uiHints": {
+    "apiKey": {
+      "label": "AgentGuard API key",
+      "placeholder": "ag_live_...",
+      "sensitive": true
+    },
+    "baseUrl": {
+      "label": "AgentGuard URL",
+      "placeholder": "https://agentguard-jade.vercel.app"
+    },
+    "failClosed": {
+      "label": "Block when AgentGuard is unavailable"
+    }
+  }
+}

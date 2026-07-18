@@ -1,0 +1,31 @@
+{
+  "name": "agentguard-openclaw",
+  "version": "0.1.0",
+  "description": "Fail-closed AgentGuard security hooks for OpenClaw workflows",
+  "type": "module",
+  "license": "MIT",
+  "files": [
+    "dist",
+    "openclaw.plugin.json",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "prepack": "pnpm build"
+  },
+  "openclaw": {
+    "extensions": [
+      "./dist/index.js"
+    ]
+  },
+  "peerDependencies": {
+    "openclaw": ">=2026.7.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.1",
+    "openclaw": "2026.7.1-2",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10"
+  }
+}
