@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agentguard"
+version = "0.1.0"
+description = "Python client for the AgentGuard prompt-injection firewall"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "AgentGuard" }]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Typing :: Typed",
+]
+
+[project.urls]
+Homepage = "https://github.com/dukeemmanuel421-web/agentguard"
+Repository = "https://github.com/dukeemmanuel421-web/agentguard"
+Issues = "https://github.com/dukeemmanuel421-web/agentguard/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+agentguard = ["py.typed"]
