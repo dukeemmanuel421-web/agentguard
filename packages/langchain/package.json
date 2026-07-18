@@ -1,0 +1,33 @@
+{
+  "name": "@agentguard/langchain",
+  "version": "0.1.0",
+  "description": "AgentGuard adapters for LangChain.js tools and retrievers",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "files": ["dist", "README.md"],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "check": "npm run build && npm test"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "peerDependencies": {
+    "@agentguard/core": "^0.1.0"
+  },
+  "devDependencies": {
+    "@agentguard/core": "file:../core",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10"
+  }
+}
