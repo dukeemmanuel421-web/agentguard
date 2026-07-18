@@ -86,7 +86,37 @@ The client also reads `AGENTGUARD_BASE_URL` and `AGENTGUARD_API_KEY` from the
 environment. Public scans and action checks are keyless in the MVP; uploads,
 batch scans, and job results require an API key.
 
-## OpenClaw plugin
+## Agentic workflow integrations
+
+AgentGuard is framework-neutral. Every agent stack has the same three trust
+boundaries: content before the model, a proposed action before execution, and
+untrusted tool output before it returns to context.
+
+```python
+from agentguard import AgentGuardMiddleware
+
+guard = AgentGuardMiddleware()
+guard.before_model(retrieved_document, source="DOCUMENT")
+
+@guard.wrap_tool
+def browse(url: str) -> str:
+    return browser.fetch(url)
+```
+
+This middleware works with custom loops and tool functions from LangChain,
+CrewAI, AutoGen, OpenAI Agents, and MCP clients without importing those
+frameworks. Sync and async gates are included. JavaScript and other runtimes can
+use the same stable REST contracts directly.
+
+| Boundary | Python middleware | REST endpoint |
+| --- | --- | --- |
+| Before model/context | `before_model` | `POST /api/v1/scan` |
+| Before side effect | `before_tool` | `POST /api/v1/check-action` |
+| After tool/retrieval | `after_tool` | `POST /api/v1/scan` |
+
+See [`examples/python/framework_middleware.py`](examples/python/framework_middleware.py).
+
+## OpenClaw adapter
 
 AgentGuard can run automatically inside OpenClaw workflows. The plugin scans
 prompts before model ingestion, blocks unsafe tool calls, and sanitizes tool
