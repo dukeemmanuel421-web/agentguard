@@ -20,3 +20,5 @@ tsconfig.tsbuildinfo
 # Generated build output
 aws/cdk.out/
 **/__pycache__/
+**/build/
+**/*.egg-info/
