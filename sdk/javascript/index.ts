@@ -1,11 +1,17 @@
 export type TrustLevel='USER_PROMPT'|'TRUSTED_TOOL'|'TOOL_OUTPUT'|'WEB_PAGE'|'DOCUMENT'|'MCP_OUTPUT'|'UNKNOWN'
-export type ScanResponse={blocked:boolean;risk:number;sanitized_text:string;findings:{detector:string;severity:string;snippet:string;reason:string}[]}
+export type ScanResponse={blocked:boolean;risk:number;sanitized_text:string;findings:{detector:string;severity:string;snippet:string;reason:string}[];policy?:{reason:string}}
 export type CheckActionInput={tool_call:Record<string,unknown>;reasoning_trace:string[];trusted_context:string[]}
 export type BatchInput={s3Key:string}|{items:{text:string;source:TrustLevel}[]}
 export type AgentGuardOptions={apiKey?:string;baseUrl?:string;timeoutMs?:number;retries?:number}
 
 export class AgentGuardError extends Error{
   constructor(message:string,public status:number){super(message)}
+}
+
+export class AgentGuardBlockedError extends AgentGuardError{
+  constructor(message:string,public stage:'model-input'|'tool-call'|'tool-output',public risk:number,public decision:unknown){
+    super(message,403)
+  }
 }
 
 export class AgentGuard{
@@ -63,5 +69,43 @@ export class AgentGuard{
   job(id:string){
     this.requireApiKey()
     return this.request<{status:string;result?:unknown}>(`/api/v1/jobs/${id}`,{method:'GET'})
+  }
+}
+
+export class AgentGuardMiddleware{
+  constructor(private client=new AgentGuard()){}
+
+  async beforeModel(content:string,source:TrustLevel='USER_PROMPT'){
+    const decision=await this.client.scan(content,source)
+    if(decision.blocked)throw new AgentGuardBlockedError(decision.policy?.reason||'AgentGuard blocked model input.','model-input',decision.risk,decision)
+    return decision
+  }
+
+  async beforeTool(name:string,arguments_:Record<string,unknown>,trustedContext:string[]=[]){
+    const decision=await this.client.checkAction({
+      tool_call:{name,arguments:arguments_},
+      reasoning_trace:[],
+      trusted_context:trustedContext,
+    })
+    if(!decision.allowed)throw new AgentGuardBlockedError(decision.reason||`AgentGuard blocked ${name}.`,'tool-call',decision.risk,decision)
+    return decision
+  }
+
+  async afterTool<T>(output:T):Promise<T>{
+    const serialized=typeof output==='string'?output:JSON.stringify(output)
+    const decision=await this.client.scan(serialized,'TOOL_OUTPUT')
+    if(decision.blocked)throw new AgentGuardBlockedError(decision.policy?.reason||'AgentGuard blocked tool output.','tool-output',decision.risk,decision)
+    if(typeof output==='string')return decision.sanitized_text as T
+    if(decision.sanitized_text!==serialized){
+      try{return JSON.parse(decision.sanitized_text) as T}catch{throw new AgentGuardBlockedError('Sanitized structured output could not be reconstructed safely.','tool-output',decision.risk,decision)}
+    }
+    return output
+  }
+
+  wrapTool<TArgs extends unknown[],TResult>(name:string,execute:(...args:TArgs)=>Promise<TResult>|TResult,trustedContext:string[]=[]){
+    return async(...args:TArgs)=>{
+      await this.beforeTool(name,{args},trustedContext)
+      return this.afterTool(await execute(...args))
+    }
   }
 }

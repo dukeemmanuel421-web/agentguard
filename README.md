@@ -1,6 +1,6 @@
 # AgentGuard
 
-Inbound prompt-injection and context-integrity firewall for AI agents. The Next.js app runs on Vercel; AWS provides DynamoDB, S3, SQS/Lambda, Secrets Manager, and a required private Fargate activation-probe service.
+Inbound prompt-injection and context-integrity firewall for AI agents. The Next.js app runs on Vercel; optional AWS infrastructure provides DynamoDB, S3, SQS/Lambda, Secrets Manager, and a private Fargate activation-probe service.
 
 **OpenAI Build Week · Developer Tools**
 [Live demo](https://agentguard-jade.vercel.app) · [Python SDK](sdk/python) · [Devpost submission copy](docs/devpost-submission.md) · [Demo script](docs/demo-script.md)
@@ -86,20 +86,102 @@ The client also reads `AGENTGUARD_BASE_URL` and `AGENTGUARD_API_KEY` from the
 environment. Public scans and action checks are keyless in the MVP; uploads,
 batch scans, and job results require an API key.
 
+## Agentic workflow integrations
+
+AgentGuard is framework-neutral. Every agent stack has the same three trust
+boundaries: content before the model, a proposed action before execution, and
+untrusted tool output before it returns to context.
+
+```python
+from agentguard import AgentGuardMiddleware
+
+guard = AgentGuardMiddleware()
+guard.before_model(retrieved_document, source="DOCUMENT")
+
+@guard.wrap_tool
+def browse(url: str) -> str:
+    return browser.fetch(url)
+```
+
+This middleware works with custom loops and tool functions from LangChain,
+CrewAI, AutoGen, OpenAI Agents, and MCP clients without importing those
+frameworks. Sync and async gates are included. JavaScript and other runtimes can
+use the same stable REST contracts directly.
+
+| Boundary | Python middleware | REST endpoint |
+| --- | --- | --- |
+| Before model/context | `before_model` | `POST /api/v1/scan` |
+| Before side effect | `before_tool` | `POST /api/v1/check-action` |
+| After tool/retrieval | `after_tool` | `POST /api/v1/scan` |
+
+See [`examples/python/framework_middleware.py`](examples/python/framework_middleware.py).
+
+## OpenClaw adapter
+
+AgentGuard can run automatically inside OpenClaw workflows. The plugin scans
+prompts before model ingestion, blocks unsafe tool calls, and sanitizes tool
+results before OpenClaw or Codex adds them to context.
+
+```bash
+cd plugins/openclaw
+pnpm install --frozen-lockfile
+pnpm build
+pnpm pack
+openclaw plugins install npm-pack:./agentguard-openclaw-0.1.0.tgz --force
+openclaw plugins enable agentguard
+openclaw config set plugins.entries.agentguard.hooks.allowConversationAccess true
+openclaw gateway restart
+```
+
+Set `AGENTGUARD_BASE_URL` and `AGENTGUARD_API_KEY` in the Gateway environment.
+See [`plugins/openclaw/README.md`](plugins/openclaw/README.md) for configuration,
+verification, local linking, and fail-closed behavior.
+
 ## Deploy
 
 1. Configure AWS credentials locally, then deploy `aws/` with CDK: `cd aws && pnpm install && pnpm deploy -c vercelTeam=TEAM_ID -c vercelProject=PROJECT_ID`.
-2. Put the OpenAI key in the generated `OpenAIKey` secret. The probe token is generated and injected into ECS automatically.
-3. Copy the stack outputs into Vercel project variables using `.env.example` as the complete list. `AWS_ROLE_ARN` is the stack's Vercel OIDC role, so no long-lived AWS access key is required.
-4. Deploy the Next.js project to Vercel. The Fargate probe must be healthy and running for scans to work; scans fail closed when the probe or LLM judge is unavailable.
+2. The DeBERTa image is pinned to an immutable Hugging Face revision. CDK generates the probe token, stores it in Secrets Manager, and injects it into Fargate.
+3. Set `AWS_ROLE_ARN` from `VercelRoleArn`, `PROBE_SERVICE_URL` from `ProbeUrl`, and `PROBE_TOKEN_SECRET_ID` from `ProbeTokenSecretArn` in Vercel. Keep `PROVIDER_MODE=openrouter` and `OPENROUTER_API_KEY` for the GPT-5.6 semantic judge.
+4. Redeploy Vercel and verify scan provenance contains `semantic` and `activation-probe` with `degraded: false`.
+
+The full stack creates a NAT gateway, private load balancer, API Gateway VPC
+Link, and a 2-vCPU/4-GB Fargate task. Review AWS pricing before deployment.
+Set `-c probeDesiredCount=2` or higher for multi-AZ capacity. The generated
+`OpenAIKey` secret is only required when using the AWS-backed OpenAI judge or
+batch Lambda.
+
+To deploy only the probe on another container platform:
+
+```bash
+docker build -t agentguard-probe aws/probe-service
+docker run -p 8080:8080 \
+  -e PROBE_INTERNAL_TOKEN="$(openssl rand -hex 32)" \
+  agentguard-probe
+```
+
+Expose it through HTTPS, then set the same token as `PROBE_SERVICE_TOKEN` and
+its public base URL as `PROBE_SERVICE_URL` in Vercel. The service image embeds
+the pinned model weights, so runtime startup does not depend on Hugging Face.
 
 ## Environment variables
 
-See `.env.example`. AWS resource names and URLs come from CDK outputs. `OPENAI_SECRET_ID` and `PROBE_TOKEN_SECRET_ID` are Secrets Manager ARNs, never secret values. `PROBE_SERVICE_URL` is the API Gateway URL backed by VPC Link and the private ALB. `API_RATE_LIMIT_PER_MINUTE` controls per-key DynamoDB conditional rate limits.
+See `.env.example`. AWS resource names and URLs come from CDK outputs.
+`OPENAI_SECRET_ID` and `PROBE_TOKEN_SECRET_ID` are Secrets Manager ARNs, never
+secret values. `PROBE_SERVICE_TOKEN` is available for non-AWS probe deployments
+that inject a token directly, but the Secrets Manager path is preferred.
+`PROBE_SERVICE_URL` is the API Gateway URL backed by VPC Link and the private
+ALB. `API_RATE_LIMIT_PER_MINUTE` controls per-key DynamoDB conditional rate
+limits.
 
 ## Security architecture
 
-Every scan executes all three detectors concurrently: TypeScript heuristic (35%), OpenAI LLM judge (40%), and private DeBERTa activation probe (25%). Risk `>= 0.62` blocks. API keys are SHA-256 hashed when configured, uploads use five-minute presigned S3 PUTs, SQS has a DLQ, and IAM grants Vercel/Lambda only the resources each needs.
+Every scan executes three signals concurrently: TypeScript heuristic (35%),
+GPT-5.6 semantic judge (40%), and an adversarial probe (25%). Direct
+OpenAI/OpenRouter deployments use a separately prompted probe pass and mark
+the response `degraded`; the full AWS path uses the private DeBERTa activation
+probe. Risk `>= 0.62` blocks. API keys are SHA-256 hashed when configured,
+uploads use five-minute presigned S3 PUTs, SQS has a DLQ, and IAM grants
+Vercel/Lambda only the resources each needs.
 
 ## API
 

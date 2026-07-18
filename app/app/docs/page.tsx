@@ -33,6 +33,29 @@ const action=`result = guard.check_action(
 if not result["allowed"]:
     raise RuntimeError(result["reason"])`
 
+const middleware=`from agentguard import AgentGuardMiddleware
+
+guard = AgentGuardMiddleware()
+
+# Gate prompts and retrieved context before the model.
+guard.before_model(content, source="DOCUMENT")
+
+# Gate arguments before execution and output before reuse.
+@guard.wrap_tool
+def browse(url: str) -> str:
+    return browser.fetch(url)`
+
+const openclaw=`cd plugins/openclaw
+pnpm install --frozen-lockfile
+pnpm build && pnpm pack
+
+openclaw plugins install \\
+  npm-pack:./agentguard-openclaw-0.1.0.tgz --force
+openclaw plugins enable agentguard
+openclaw config set \\
+  plugins.entries.agentguard.hooks.allowConversationAccess true
+openclaw gateway restart`
+
 export default function Docs(){
   return <main className="min-h-screen">
     <header className="border-b"><div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 lg:px-8"><AgentGuardLogo/><Button render={<Link href="/app"/>} nativeButton={false} variant="ghost" size="sm"><ArrowLeft/>Back</Button></div></header>
@@ -43,6 +66,8 @@ export default function Docs(){
           <a href="#quickstart" className="font-medium">Quickstart</a>
           <a href="#openrouter" className="text-muted-foreground">OpenRouter</a>
           <a href="#python" className="text-muted-foreground">Python</a>
+          <a href="#middleware" className="text-muted-foreground">Any agent framework</a>
+          <a href="#openclaw-plugin" className="text-muted-foreground">OpenClaw plugin</a>
           <a href="#actions" className="text-muted-foreground">Guard actions</a>
           <a href="#authentication" className="text-muted-foreground">Authentication</a>
           <a href="#model" className="text-muted-foreground">Risk model</a>
@@ -58,6 +83,8 @@ export default function Docs(){
         <CodeSection id="openrouter" title="Connect OpenRouter" endpoint="Server configuration" code={openrouter}/>
         <p className="-mt-7 mb-12 max-w-2xl text-sm leading-relaxed text-muted-foreground">Keep the OpenRouter key on the AgentGuard server. Deployed instances can alternatively save an encrypted workspace key under <Link className="text-foreground underline underline-offset-4" href="/app">Console → Providers</Link>.</p>
         <CodeSection id="python" title="Install and scan" endpoint="Python 3.10+" code={python}/>
+        <CodeSection id="middleware" title="Protect any agent framework" endpoint="Sync and async middleware" code={middleware}/>
+        <CodeSection id="openclaw-plugin" title="Protect an OpenClaw workflow" endpoint="Prompt · tool-call · tool-result gates" code={openclaw}/>
         <CodeSection id="actions" title="Guard tool calls" endpoint="POST /api/v1/check-action" code={action}/>
         <CodeSection id="curl" title="Or use HTTP directly" endpoint="POST /api/v1/scan" code={curl}/>
         <section id="authentication" className="border-t py-12">

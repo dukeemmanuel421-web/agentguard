@@ -22,3 +22,5 @@ aws/cdk.out/
 **/__pycache__/
 **/build/
 **/*.egg-info/
+plugins/openclaw/dist/
+plugins/openclaw/*.tgz
