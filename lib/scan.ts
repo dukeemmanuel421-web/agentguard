@@ -26,6 +26,8 @@ export async function scanText(text:string,source:TrustLevel='UNKNOWN',ownerId='
  if(!text.trim()||text.length>50000) throw new Error('Text must contain 1–50,000 characters.')
  const started=Date.now(); const heuristic=heuristicDetector(text); const remote=await resolveRemoteDetectors(text,source,ownerId); const {llm,probe}=remote
  const detectors={heuristic,llm,probe}; const decision=evaluatePolicy(text,source,detectors,defaultPolicy); const {risk}=decision; const findings=(Object.entries(detectors) as [string,DetectorResult][]).flatMap(([detector,result])=>result.findings.map(f=>({...f,detector} as Finding))); const policy={id:defaultPolicy.id,name:defaultPolicy.name,version:defaultPolicy.version,threshold:decision.threshold,reason:decision.reason}; const result={blocked:decision.blocked,risk,sanitized_text:sanitizeText(text),detectors,findings,policy,provenance:remote.provenance,degraded:remote.provenance.some(item=>item.fallback)}
- await dynamo.send(new PutCommand({TableName:tables.scans,Item:{id:nanoid(),ownerId,createdAt:new Date().toISOString(),source,risk,blocked:result.blocked,findings,detectors,policy,provenance:remote.provenance,degraded:result.degraded,latencyMs:Date.now()-started,textHash:await crypto.subtle.digest('SHA-256',new TextEncoder().encode(text)).then(v=>Buffer.from(v).toString('hex'))}}))
+ if(tables.scans){
+  await dynamo.send(new PutCommand({TableName:tables.scans,Item:{id:nanoid(),ownerId,createdAt:new Date().toISOString(),source,risk,blocked:result.blocked,findings,detectors,policy,provenance:remote.provenance,degraded:result.degraded,latencyMs:Date.now()-started,textHash:await crypto.subtle.digest('SHA-256',new TextEncoder().encode(text)).then(v=>Buffer.from(v).toString('hex'))}}))
+ }
  return result
 }
