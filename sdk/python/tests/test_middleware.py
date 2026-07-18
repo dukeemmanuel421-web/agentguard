@@ -14,6 +14,10 @@ class FakeClient:
         self.calls.append(("scan", text, source))
         return self.scans.pop(0)
 
+    def scan_document(self, text, source="DOCUMENT"):
+        self.calls.append(("scan_document", text, source))
+        return self.scans.pop(0)
+
     def check_action(self, tool_call, reasoning_trace=None, trusted_context=None):
         self.calls.append(
             ("action", tool_call, reasoning_trace or [], trusted_context or [])
@@ -88,6 +92,15 @@ class AgentGuardMiddlewareTest(unittest.TestCase):
             delete_database()
 
         self.assertFalse(executed)
+
+    def test_large_model_input_uses_document_scan(self):
+        client = FakeClient(scans=[scan()])
+        middleware = AgentGuardMiddleware(client)
+        content = "x" * 50_001
+
+        middleware.before_model(content)
+
+        self.assertEqual(client.calls[0], ("scan_document", content, "USER_PROMPT"))
 
 
 if __name__ == "__main__":

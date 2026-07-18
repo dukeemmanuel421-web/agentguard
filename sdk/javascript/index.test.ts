@@ -33,4 +33,18 @@ describe('AgentGuardMiddleware',()=>{
     }))
     expect(client.scan).toHaveBeenCalledWith('result from https://example.com','TOOL_OUTPUT')
   })
+
+  it('uses document scanning for large model input',async()=>{
+    const client={
+      scan:vi.fn(),
+      scanDocument:vi.fn().mockResolvedValue(scan()),
+    }
+    const middleware=new AgentGuardMiddleware(client as never)
+    const content='x'.repeat(50001)
+
+    await middleware.beforeModel(content)
+
+    expect(client.scanDocument).toHaveBeenCalledWith(content,'USER_PROMPT')
+    expect(client.scan).not.toHaveBeenCalled()
+  })
 })
