@@ -12,7 +12,7 @@ export function SiteHeader(){
         <a href="/#approach" className="text-muted-foreground transition-colors hover:text-foreground">Approach</a>
         <Link href="/app/docs" className="text-muted-foreground transition-colors hover:text-foreground">Developers</Link>
       </nav>
-      <Button render={<Link href="/app"/>} nativeButton={false} size="lg" className="rounded-full px-4">Open console<ArrowUpRight data-icon="inline-end"/></Button>
+      <Button render={<Link href="/signin"/>} nativeButton={false} size="lg" className="rounded-full px-4">Sign in<ArrowUpRight data-icon="inline-end"/></Button>
     </div>
   </header>
 }
