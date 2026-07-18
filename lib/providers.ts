@@ -87,7 +87,7 @@ async function classify(args: {
 }
 
 export async function getProviderSettings(workspaceId?: string): Promise<ProviderSettings> {
-  if (!workspaceId || workspaceId === 'public') return { mode: 'auto' }
+  if (!workspaceId) return { mode: 'auto' }
   const item = await getWorkspaceItem(workspaceId, 'provider', 'settings')
   return (item?.settings as ProviderSettings | undefined) || { mode: 'auto' }
 }
