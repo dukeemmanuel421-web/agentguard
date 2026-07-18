@@ -1,12 +1,14 @@
 {
-  "name": "my-project",
+  "name": "agentguard",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.1090.0",
