@@ -3,6 +3,12 @@ import { ArrowLeft,ArrowRight } from 'lucide-react'
 import { AgentGuardLogo } from '@/components/agentguard-logo'
 import { Button } from '@/components/ui/button'
 
+const openrouter=`export PROVIDER_MODE=openrouter
+export OPENROUTER_API_KEY=sk-or-v1-...
+export OPENROUTER_MODEL=openai/gpt-4.1-mini
+
+pnpm dev`
+
 const python=`pip install ./sdk/python
 
 from agentguard import AgentGuard
@@ -35,6 +41,7 @@ export default function Docs(){
         <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">SDK guide</p>
         <nav className="mt-6 flex flex-col gap-3 text-sm">
           <a href="#quickstart" className="font-medium">Quickstart</a>
+          <a href="#openrouter" className="text-muted-foreground">OpenRouter</a>
           <a href="#python" className="text-muted-foreground">Python</a>
           <a href="#actions" className="text-muted-foreground">Guard actions</a>
           <a href="#authentication" className="text-muted-foreground">Authentication</a>
@@ -48,6 +55,8 @@ export default function Docs(){
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">Install the dependency-free client, point it at your deployment, and scan untrusted content before it enters model context.</p>
           <Button render={<a href="#python"/>} nativeButton={false} className="mt-8 rounded-full">Install the SDK<ArrowRight/></Button>
         </section>
+        <CodeSection id="openrouter" title="Connect OpenRouter" endpoint="Server configuration" code={openrouter}/>
+        <p className="-mt-7 mb-12 max-w-2xl text-sm leading-relaxed text-muted-foreground">Keep the OpenRouter key on the AgentGuard server. Deployed instances can alternatively save an encrypted workspace key under <Link className="text-foreground underline underline-offset-4" href="/app">Console → Providers</Link>.</p>
         <CodeSection id="python" title="Install and scan" endpoint="Python 3.10+" code={python}/>
         <CodeSection id="actions" title="Guard tool calls" endpoint="POST /api/v1/check-action" code={action}/>
         <CodeSection id="curl" title="Or use HTTP directly" endpoint="POST /api/v1/scan" code={curl}/>

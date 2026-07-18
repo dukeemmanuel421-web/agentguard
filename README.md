@@ -13,10 +13,17 @@ pip install ./sdk/python
 Run the web service locally with a detector provider configured:
 
 ```bash
-export OPENAI_API_KEY=...
+export PROVIDER_MODE=openrouter
+export OPENROUTER_API_KEY=sk-or-v1-...
+export OPENROUTER_MODEL=openai/gpt-4.1-mini
 pnpm install
 pnpm dev
 ```
+
+OpenAI is also supported with `PROVIDER_MODE=openai` and `OPENAI_API_KEY`.
+Provider credentials belong on the AgentGuard server; never put them in the
+Python client or browser. On a deployed instance, they can also be encrypted
+and saved from **Console → Providers**.
 
 Then scan untrusted input before adding it to model context:
 
