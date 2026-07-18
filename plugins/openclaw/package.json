@@ -4,6 +4,9 @@
   "description": "Fail-closed AgentGuard security hooks for OpenClaw workflows",
   "type": "module",
   "license": "MIT",
+  "repository": {"type": "git", "url": "https://github.com/dukeemmanuel421-web/agentguard.git", "directory": "plugins/openclaw"},
+  "homepage": "https://agentguard-jade.vercel.app",
+  "publishConfig": {"access": "public", "provenance": true},
   "files": [
     "dist",
     "openclaw.plugin.json",
