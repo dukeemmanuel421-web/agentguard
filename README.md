@@ -162,11 +162,13 @@ partially sanitized content.
 
 ## Authentication and tenant isolation
 
-The console uses email magic-link sessions backed by the DynamoDB Auth table.
-Platform routes derive workspace identity from the server session, enforce
-same-origin mutations, and never accept a workspace id from the browser. API
-keys carry a separate `workspaceId`, and uploads/jobs enforce that tenant
-boundary.
+Authentication is optional. With `PLATFORM_AUTH_REQUIRED=false` (the default),
+the console uses the shared public demo workspace. With
+`PLATFORM_AUTH_REQUIRED=true`, the console uses email magic-link sessions
+backed by the DynamoDB Auth table. Protected routes then derive workspace
+identity from the server session, enforce same-origin mutations, and never
+accept a workspace id from the browser. API keys carry a separate
+`workspaceId`, and uploads/jobs enforce that tenant boundary.
 
 Configure `AUTH_SECRET`, `NEXTAUTH_URL`, `GMAIL_USER`, `GMAIL_APP_PASSWORD`, and
 `EMAIL_FROM` before enabling console access.

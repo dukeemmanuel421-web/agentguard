@@ -1,8 +1,10 @@
 import { NextResponse } from 'next/server'
 import { getSession } from '@/lib/auth'
-import { getWorkspace } from '@/lib/workspace'
+import { getWorkspace,publicWorkspace } from '@/lib/workspace'
 
+export const isPlatformAuthRequired=()=>process.env.PLATFORM_AUTH_REQUIRED==='true'
 export async function getSessionWorkspace(){
+ if(!isPlatformAuthRequired())return publicWorkspace
  const session=await getSession()
  if(!session?.user?.id)return null
  return getWorkspace(session.user)
