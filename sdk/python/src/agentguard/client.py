@@ -24,6 +24,7 @@ class AgentGuard:
         api_key: str | None = None,
         base_url: str | None = None,
         timeout: float = 15,
+        document_timeout: float = 300,
         retries: int = 2,
     ):
         self.api_key = api_key if api_key is not None else os.getenv("AGENTGUARD_API_KEY")
@@ -33,9 +34,16 @@ class AgentGuard:
             or "http://localhost:3000"
         ).rstrip("/")
         self.timeout = timeout
+        self.document_timeout = document_timeout
         self.retries = max(0, retries)
 
-    def _request(self, path: str, payload: dict[str, Any] | None = None) -> Any:
+    def _request(
+        self,
+        path: str,
+        payload: dict[str, Any] | None = None,
+        *,
+        timeout: float | None = None,
+    ) -> Any:
         body = None if payload is None else json.dumps(payload).encode()
         headers = {"Accept": "application/json"}
         if body is not None:
@@ -52,7 +60,10 @@ class AgentGuard:
                 headers=headers,
             )
             try:
-                with urlopen(request, timeout=self.timeout) as response:
+                with urlopen(
+                    request,
+                    timeout=self.timeout if timeout is None else timeout,
+                ) as response:
                     return json.load(response)
             except HTTPError as error:
                 message = self._error_message(error)
@@ -85,6 +96,13 @@ class AgentGuard:
 
     def scan(self, text: str, source: str = "UNKNOWN") -> dict[str, Any]:
         return self._request("/api/v1/scan", {"text": text, "source": source})
+
+    def scan_document(self, text: str, source: str = "DOCUMENT") -> dict[str, Any]:
+        return self._request(
+            "/api/v1/scan-document",
+            {"text": text, "source": source},
+            timeout=self.document_timeout,
+        )
 
     def check_action(
         self,

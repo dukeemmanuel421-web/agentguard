@@ -59,6 +59,22 @@ class AgentGuardTest(unittest.TestCase):
                 items=[{"text": "hello", "source": "DOCUMENT"}]
             )
 
+    @patch("agentguard.client.urlopen")
+    def test_document_scan_uses_document_endpoint_and_timeout(self, mocked_urlopen):
+        mocked_urlopen.return_value = Response(
+            json.dumps({"blocked": False, "risk": 0.1}).encode()
+        )
+        guard = AgentGuard(
+            base_url="https://guard.test", document_timeout=123, retries=0
+        )
+
+        guard.scan_document("large document")
+
+        request = mocked_urlopen.call_args.args[0]
+        self.assertEqual(request.full_url, "https://guard.test/api/v1/scan-document")
+        self.assertEqual(mocked_urlopen.call_args.kwargs["timeout"], 123)
+        self.assertEqual(json.loads(request.data)["source"], "DOCUMENT")
+
 
 if __name__ == "__main__":
     unittest.main()

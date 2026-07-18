@@ -10,6 +10,7 @@ from .client import AgentGuard, AgentGuardError
 
 P = ParamSpec("P")
 R = TypeVar("R")
+SINGLE_SCAN_LIMIT = 50_000
 
 
 class AgentGuardBlockedError(AgentGuardError):
@@ -41,7 +42,11 @@ class AgentGuardMiddleware:
         *,
         source: str = "USER_PROMPT",
     ) -> dict[str, Any]:
-        decision = self.client.scan(content, source)
+        decision = (
+            self.client.scan_document(content, source)
+            if len(content) > SINGLE_SCAN_LIMIT
+            else self.client.scan(content, source)
+        )
         self._require_allowed(decision, "model input")
         return decision
 
@@ -77,7 +82,11 @@ class AgentGuardMiddleware:
             self._json_safe(output),
             separators=(",", ":"),
         )
-        decision = self.client.scan(serialized, source)
+        decision = (
+            self.client.scan_document(serialized, source)
+            if len(serialized) > SINGLE_SCAN_LIMIT
+            else self.client.scan(serialized, source)
+        )
         self._require_allowed(decision, "tool output")
         sanitized = decision.get("sanitized_text", serialized)
         if isinstance(output, str):

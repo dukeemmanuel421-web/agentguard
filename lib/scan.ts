@@ -7,6 +7,7 @@ import { type DetectorResult,type Finding,type ScanResult,type TrustLevel } from
 import { heuristicDetector,sanitizeText } from '@/lib/detectors/heuristic'
 import { evaluatePolicy,getActivePolicy } from '@/lib/policy'
 import { getProviderSettings,runDirectDetectorFallback,runDirectSemanticDetector, type ProviderTrace } from '@/lib/providers'
+import { MAX_SCAN_TEXT_LENGTH } from '@/lib/limits'
 
 const cache=new Map<string,{value:string;expires:number}>()
 const detectorSchema=z.object({risk:z.number().min(0).max(1),rationale:z.string().max(1000).optional(),findings:z.array(z.object({severity:z.enum(['low','medium','high','critical']),snippet:z.string().max(500),reason:z.string().max(1000)})).max(12)})
@@ -31,12 +32,12 @@ async function resolveRemoteDetectors(text:string,source:TrustLevel,ownerId:stri
  }
  throw new Error(`No complete detector path is available. Configure a semantic provider and the activation probe. ${errors.join(' ')}`)
 }
-export async function scanText(text:string,source:TrustLevel='UNKNOWN',ownerId='public'):Promise<ScanResult>{
- if(!text.trim()||text.length>50000) throw new Error('Text must contain 1–50,000 characters.')
+export async function scanText(text:string,source:TrustLevel='UNKNOWN',ownerId='public',traceId?:string):Promise<ScanResult>{
+ if(!text.trim()||text.length>MAX_SCAN_TEXT_LENGTH) throw new Error('Text must contain 1–50,000 characters.')
  const started=Date.now(); const [remote,activePolicy]=await Promise.all([resolveRemoteDetectors(text,source,ownerId),getActivePolicy(ownerId)]); const heuristic=heuristicDetector(text); const {llm,probe}=remote
  const detectors={heuristic,llm,probe}; const decision=evaluatePolicy(text,source,detectors,activePolicy); const {risk}=decision; const findings=(Object.entries(detectors) as [string,DetectorResult][]).flatMap(([detector,result])=>result.findings.map(f=>({...f,detector} as Finding))); const policy={id:activePolicy.id,name:activePolicy.name,version:activePolicy.version,threshold:decision.threshold,reason:decision.reason}; const result={blocked:decision.blocked,risk,sanitized_text:sanitizeText(text),detectors,findings,policy,provenance:remote.provenance,degraded:remote.provenance.some(item=>item.signal==='inferred-probe')}
  if(tables.scans){
-  await dynamo.send(new PutCommand({TableName:tables.scans,Item:{id:nanoid(),ownerId,createdAt:new Date().toISOString(),source,risk,blocked:result.blocked,findings,detectors,policy,provenance:remote.provenance,degraded:result.degraded,latencyMs:Date.now()-started,textHash:await crypto.subtle.digest('SHA-256',new TextEncoder().encode(text)).then(v=>Buffer.from(v).toString('hex'))}}))
+  await dynamo.send(new PutCommand({TableName:tables.scans,Item:{id:nanoid(),ownerId,traceId,createdAt:new Date().toISOString(),source,risk,blocked:result.blocked,findings,detectors,policy,provenance:remote.provenance,degraded:result.degraded,latencyMs:Date.now()-started,textHash:await crypto.subtle.digest('SHA-256',new TextEncoder().encode(text)).then(v=>Buffer.from(v).toString('hex'))}}))
  }
  return result
 }

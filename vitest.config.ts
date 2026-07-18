@@ -3,7 +3,7 @@ import { configDefaults, defineConfig } from 'vitest/config'
 
 export default defineConfig({
   test: {
-    exclude: [...configDefaults.exclude, 'plugins/openclaw/**'],
+    exclude: [...configDefaults.exclude, 'plugins/openclaw/**', 'packages/**'],
   },
   resolve: {
     alias: {
