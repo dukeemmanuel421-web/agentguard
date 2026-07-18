@@ -10,6 +10,6 @@ export async function authenticateApiKey(request:Request){
  const expected=Buffer.from(item.Item.keyHash); const actual=Buffer.from(hash)
  if(expected.length!==actual.length||!timingSafeEqual(expected,actual)) return null
  const minute=Math.floor(Date.now()/60000); const usageKey=`${hash}:${minute}`
- try { await dynamo.send(new UpdateCommand({TableName:tables.usage,Key:{id:usageKey},UpdateExpression:'ADD #count :one SET #expiresAt = :ttl, #userId = :uid',ConditionExpression:'attribute_not_exists(#count) OR #count < :limit',ExpressionAttributeNames:{'#count':'count','#expiresAt':'expiresAt','#userId':'userId'},ExpressionAttributeValues:{':one':1,':limit':Number(process.env.API_RATE_LIMIT_PER_MINUTE||60),':ttl':Math.floor(Date.now()/1000)+180,':uid':item.Item.userId}})); return item.Item
+ try { await dynamo.send(new UpdateCommand({TableName:tables.usage,Key:{id:usageKey},UpdateExpression:'ADD #count :one SET #expiresAt = :ttl, #userId = :uid',ConditionExpression:'attribute_not_exists(#count) OR #count < :limit',ExpressionAttributeNames:{'#count':'count','#expiresAt':'expiresAt','#userId':'userId'},ExpressionAttributeValues:{':one':1,':limit':Number(process.env.API_RATE_LIMIT_PER_MINUTE||60),':ttl':Math.floor(Date.now()/1000)+180,':uid':item.Item.workspaceId||item.Item.userId}})); return {...item.Item,workspaceId:item.Item.workspaceId||item.Item.userId}
  } catch(error){ if((error as {name?:string}).name==='ConditionalCheckFailedException') return {rateLimited:true}; throw error }
 }
