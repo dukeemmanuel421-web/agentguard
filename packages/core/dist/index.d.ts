@@ -1,4 +1,4 @@
-export type TrustLevel = "USER_PROMPT" | "TRUSTED_TOOL" | "TOOL_OUTPUT" | "WEB_PAGE" | "DOCUMENT" | "MCP_OUTPUT" | "UNKNOWN";
+export type TrustLevel = "USER_PROMPT" | "TRUSTED_TOOL" | "TOOL_CALL" | "TOOL_OUTPUT" | "WEB_PAGE" | "DOCUMENT" | "MCP_OUTPUT" | "UNKNOWN";
 export interface Finding {
     detector: string;
     severity: string;

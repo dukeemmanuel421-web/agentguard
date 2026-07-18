@@ -111,7 +111,7 @@ use the same stable REST contracts directly.
 | Boundary | Python middleware | REST endpoint |
 | --- | --- | --- |
 | Before model/context | `before_model` | `POST /api/v1/scan` |
-| Before side effect | `before_tool` | `POST /api/v1/check-action` |
+| Before side effect | `before_tool` | `POST /api/v1/check-action` (`TOOL_CALL`) |
 | After tool/retrieval | `after_tool` | `POST /api/v1/scan` |
 
 See [`examples/python/framework_middleware.py`](examples/python/framework_middleware.py).
@@ -125,7 +125,7 @@ Publish-ready packages live under `packages/`:
 - `@agentguard/openai-agents`
 - `@agentguard/mcp`
 
-Run `pnpm packages:check` to build and test all four. Registry publication
+Run `pnpm packages:check` to build and test all four. The adapters keep the same fail-closed behavior as the core client: request failures become exceptions instead of permissive results. Registry publication
 requires ownership of the `@agentguard` npm scope; until then each package can
 be installed from its directory or packed with `npm pack`.
 
@@ -158,7 +158,7 @@ chunk blocks the full document and document risk is the maximum chunk risk.
 
 `POST /api/v1/scan-document/stream` returns NDJSON progress records followed by
 one final result. Progress records never contain an early allow verdict or
-partially sanitized content.
+partially sanitized content; only the terminal `result` event carries the policy decision.
 
 ## Authentication and tenant isolation
 
@@ -176,7 +176,7 @@ Configure `AUTH_SECRET`, `NEXTAUTH_URL`, `GMAIL_USER`, `GMAIL_APP_PASSWORD`, and
 ## Webhooks and tracing
 
 Authenticated workspaces can register SSRF-validated HTTPS webhooks for blocked,
-elevated, and degraded scans. Scan responses include
+elevated, and degraded scans. Scan and action-check responses include detector provenance plus degraded-state fields so a client can distinguish a true DeBERTa activation probe from a same-provider inferred-probe fallback. Scan responses include
 `X-AgentGuard-Trace-Id`; signed delivery runs through SQS/Lambda with bounded
 retries and DynamoDB delivery records. Set `SQS_WEBHOOK_QUEUE_URL` from the CDK
 `WebhookQueueUrl` output.
