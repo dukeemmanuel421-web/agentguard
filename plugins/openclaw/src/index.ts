@@ -2,6 +2,7 @@ import {
   buildJsonPluginConfigSchema,
   definePluginEntry,
   type OpenClawPluginApi,
+  type OpenClawPluginDefinition,
 } from 'openclaw/plugin-sdk/plugin-entry'
 import {
   AgentGuardClient,
@@ -191,10 +192,12 @@ export function registerAgentGuard(api: OpenClawPluginApi) {
   )
 }
 
-export default definePluginEntry({
+const plugin: OpenClawPluginDefinition = definePluginEntry({
   id: 'agentguard',
   name: 'AgentGuard',
   description: 'Fail-closed prompt, tool-call, and tool-result security.',
   configSchema,
   register: registerAgentGuard,
 })
+
+export default plugin
