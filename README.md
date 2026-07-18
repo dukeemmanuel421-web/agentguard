@@ -116,6 +116,19 @@ use the same stable REST contracts directly.
 
 See [`examples/python/framework_middleware.py`](examples/python/framework_middleware.py).
 
+### First-party packages
+
+Publish-ready packages live under `packages/`:
+
+- `@agentguard/core`
+- `@agentguard/langchain`
+- `@agentguard/openai-agents`
+- `@agentguard/mcp`
+
+Run `pnpm packages:check` to build and test all four. Registry publication
+requires ownership of the `@agentguard` npm scope; until then each package can
+be installed from its directory or packed with `npm pack`.
+
 ## OpenClaw adapter
 
 AgentGuard can run automatically inside OpenClaw workflows. The plugin scans
@@ -136,6 +149,47 @@ openclaw gateway restart
 Set `AGENTGUARD_BASE_URL` and `AGENTGUARD_API_KEY` in the Gateway environment.
 See [`plugins/openclaw/README.md`](plugins/openclaw/README.md) for configuration,
 verification, local linking, and fail-closed behavior.
+
+## Large documents and progress streaming
+
+`POST /api/v1/scan-document` scans documents up to 200,000 characters using
+40,000-character chunks with overlap. Aggregation is conservative: one blocked
+chunk blocks the full document and document risk is the maximum chunk risk.
+
+`POST /api/v1/scan-document/stream` returns NDJSON progress records followed by
+one final result. Progress records never contain an early allow verdict or
+partially sanitized content.
+
+## Authentication and tenant isolation
+
+The console uses email magic-link sessions backed by the DynamoDB Auth table.
+Platform routes derive workspace identity from the server session, enforce
+same-origin mutations, and never accept a workspace id from the browser. API
+keys carry a separate `workspaceId`, and uploads/jobs enforce that tenant
+boundary.
+
+Configure `AUTH_SECRET`, `NEXTAUTH_URL`, `GMAIL_USER`, `GMAIL_APP_PASSWORD`, and
+`EMAIL_FROM` before enabling console access.
+
+## Webhooks and tracing
+
+Authenticated workspaces can register SSRF-validated HTTPS webhooks for blocked,
+elevated, and degraded scans. Scan responses include
+`X-AgentGuard-Trace-Id`; signed delivery runs through SQS/Lambda with bounded
+retries and DynamoDB delivery records. Set `SQS_WEBHOOK_QUEUE_URL` from the CDK
+`WebhookQueueUrl` output.
+
+## Injection benchmark
+
+The versioned dataset, schema, baseline, metrics tests, and CLI live under
+`benchmarks/` and `scripts/run-injection-benchmark.ts`. Run:
+
+```bash
+AGENTGUARD_BASE_URL=https://agentguard-jade.vercel.app pnpm benchmark:run
+```
+
+The read-only dashboard is available at `/app/benchmark`; committed baseline
+results are labeled as reference data rather than live production claims.
 
 ## Deploy
 
