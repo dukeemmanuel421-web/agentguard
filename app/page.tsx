@@ -1,47 +1,7 @@
-export default function Page() {
-  return (
-    <main
-      style={{
-        colorScheme: 'light dark',
-        position: 'relative',
-        display: 'flex',
-        minHeight: '100vh',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'light-dark(#fff, #000)',
-        color: 'light-dark(#000, #fff)',
-      }}
-    >
-      <svg
-        aria-hidden="true"
-        style={{ width: 80, height: 80 }}
-        width={80}
-        height={80}
-        fill="none"
-        viewBox="0 0 20 20"
-        xmlns="http://www.w3.org/2000/svg"
-        stroke="currentColor"
-        strokeWidth="0.5"
-      >
-        <path
-          d="M14.2 14.2H17V6.9375C17 4.76288 15.2371 3 13.0625 3H5.8V5.8M14.2 14.2V7.79063L7.79062 14.2H14.2ZM14.2 14.2V17H6.9375C4.76288 17 3 15.2371 3 13.0625V5.8H5.8M5.8 5.8V12.2313L12.2313 5.8H5.8Z"
-          strokeLinejoin="round"
-        />
-      </svg>
-      <p
-        style={{
-          position: 'absolute',
-          left: '50%',
-          top: 'calc(50% + 56px)',
-          transform: 'translateX(-50%)',
-          whiteSpace: 'nowrap',
-          fontSize: '14px',
-          fontWeight: 500,
-          color: 'light-dark(#71717a, #a1a1aa)',
-        }}
-      >
-        Your v0 generation will show here.
-      </p>
-    </main>
-  )
-}
+import { ArrowDown,BrainCircuit,Code2,Network,ShieldAlert } from 'lucide-react'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { ScannerPlayground } from '@/components/scanner-playground'
+import { SiteHeader } from '@/components/site-header'
+export default function Page(){return <main><SiteHeader/><section className="border-b"><div className="mx-auto grid min-h-[530px] max-w-7xl items-center gap-10 px-4 py-16 md:px-6 lg:grid-cols-[1.1fr_.9fr] lg:py-24"><div className="flex flex-col items-start gap-6"><Badge variant="outline"><ShieldAlert/>Inbound security for AI agents</Badge><h1 className="max-w-4xl text-balance font-sans text-5xl font-semibold leading-[1.02] tracking-[-0.045em] md:text-6xl lg:text-7xl">Your agent reads untrusted text. <span className="text-muted-foreground">AgentGuard reads it first.</span></h1><p className="max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground">The missing inbound layer for prompt injection and context integrity. Screen pages, documents, tool output, and MCP responses before they can steer your agent.</p><div className="flex flex-wrap gap-3"><Button render={<a href="#playground"/>} size="lg">Try a live attack<ArrowDown/></Button><Button render={<a href="/app/docs"/>} variant="outline" size="lg">Read the API docs<Code2/></Button></div></div><div className="rounded-2xl border bg-card p-3 shadow-sm"><div className="flex items-center justify-between border-b px-3 py-2"><div className="flex gap-1.5"><span className="size-2 rounded-full bg-destructive"/><span className="size-2 rounded-full bg-muted-foreground"/><span className="size-2 rounded-full bg-primary"/></div><span className="font-mono text-xs text-muted-foreground">inbound/request.trace</span></div><div className="flex flex-col gap-3 p-3 font-mono text-xs"><TraceRow icon={Network} label="source" value="WEB_PAGE · untrusted"/><TraceRow icon={ShieldAlert} label="heuristic" value="override + exfiltration" danger/><TraceRow icon={BrainCircuit} label="llm-judge" value="0.94 injection likelihood" danger/><TraceRow icon={Code2} label="activation-probe" value="0.87 anomalous activations" danger/><div className="mt-2 flex items-center justify-between rounded-lg bg-destructive p-4 text-destructive-foreground"><span className="font-semibold">VERDICT</span><span className="text-base font-semibold">BLOCKED · 92</span></div></div></div></div></section><ScannerPlayground/><section id="pipeline" className="border-y bg-muted"><div className="mx-auto grid max-w-7xl gap-8 px-4 py-16 md:px-6 lg:grid-cols-3">{[['01','Pattern intelligence','Fast local signatures catch overrides, tool smuggling, encoded payloads, and hidden Unicode.'],['02','Semantic judgment','A constrained LLM judge explains intent and identifies attacks that evade static rules.'],['03','Activation evidence','A private DeBERTa service measures internal activation patterns before every verdict.']].map(([n,title,body])=><div key={n} className="flex flex-col gap-3"><span className="font-mono text-xs text-muted-foreground">DETECTOR {n}</span><h2 className="text-xl font-semibold">{title}</h2><p className="leading-relaxed text-muted-foreground">{body}</p></div>)}</div></section><footer className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-8 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between md:px-6"><p>AgentGuard · Risk-scored inbound security for AI systems.</p><p>Heuristics 35% · LLM 40% · Probe 25%</p></footer></main>}
+function TraceRow({icon:Icon,label,value,danger=false}:{icon:typeof Network;label:string;value:string;danger?:boolean}){return <div className="flex items-center gap-3 rounded-lg border bg-background p-3"><Icon className={danger?'size-4 text-destructive':'size-4 text-muted-foreground'}/><span className="text-muted-foreground">{label}</span><span className="ml-auto text-right font-medium">{value}</span></div>}
