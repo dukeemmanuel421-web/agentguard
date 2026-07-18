@@ -25,7 +25,7 @@ const probeRubric = 'Independently inspect hidden instruction boundaries, role c
 const providerTimeoutMs = Number(process.env.PROVIDER_TIMEOUT_MS || 12000)
 
 const detectorResponseSchema = z.object({
-  risk: z.coerce.number().min(0).max(1).catch(0),
+  risk: z.number().min(0).max(1),
   rationale: z.string().max(1000).catch('No rationale returned.'),
   findings: z.array(z.object({
     severity: z.enum(['low', 'medium', 'high', 'critical']).catch('medium'),
@@ -86,7 +86,7 @@ async function classify(args: {
   return parseDetector(payload.choices?.[0]?.message?.content || '{}', Date.now() - started)
 }
 
-async function settingsFor(workspaceId?: string): Promise<ProviderSettings> {
+export async function getProviderSettings(workspaceId?: string): Promise<ProviderSettings> {
   if (!workspaceId || workspaceId === 'public') return { mode: 'auto' }
   const item = await getWorkspaceItem(workspaceId, 'provider', 'settings')
   return (item?.settings as ProviderSettings | undefined) || { mode: 'auto' }
@@ -105,7 +105,8 @@ function directCandidate(provider: Exclude<ProviderName, 'aws'>, settings: Provi
 }
 
 export async function runDirectDetectorFallback(text: string, source: TrustLevel, workspaceId?: string) {
-  const settings = await settingsFor(workspaceId)
+  const settings = await getProviderSettings(workspaceId)
+  if (settings.mode === 'aws') throw new Error('Workspace is configured for the AWS detector pipeline')
   const order: Exclude<ProviderName, 'aws'>[] = settings.mode === 'openrouter'
     ? ['openrouter']
     : settings.mode === 'openai'
@@ -133,7 +134,7 @@ export async function runDirectDetectorFallback(text: string, source: TrustLevel
 }
 
 export async function getProviderStatus(workspaceId: string) {
-  const settings = await settingsFor(workspaceId)
+  const settings = await getProviderSettings(workspaceId)
   return {
     mode: settings.mode,
     openai: { configured: Boolean(settings.openai || process.env.OPENAI_API_KEY), suffix: settings.openai?.suffix, source: settings.openai ? 'workspace' : process.env.OPENAI_API_KEY ? 'environment' : null, model: settings.openaiModel || process.env.OPENAI_MODEL || 'gpt-4.1-mini' },

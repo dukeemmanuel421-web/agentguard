@@ -20,6 +20,8 @@ class AgentGuard:
             if attempt<self.retries:time.sleep(.25*(2**attempt))
         raise AgentGuardError('AgentGuard unavailable; fail closed.')
     def scan(self,text:str,source:str='UNKNOWN'):return self._request('/api/v1/scan',{'text':text,'source':source})
-    def check_action(self,action:str,context:str=''):return self._request('/api/v1/check-action',{'action':action,'context':context})
-    def submit_batch(self,key:str):return self._request('/api/v1/scan-batch',{'key':key})
+    def check_action(self,tool_call:dict,reasoning_trace:list[str]|None=None,trusted_context:list[str]|None=None):return self._request('/api/v1/check-action',{'tool_call':tool_call,'reasoning_trace':reasoning_trace or [],'trusted_context':trusted_context or []})
+    def submit_batch(self,*,s3_key:str|None=None,items:list[dict]|None=None):
+        if (s3_key is None)==(items is None):raise ValueError('Provide exactly one of s3_key or items')
+        return self._request('/api/v1/scan-batch',{'s3Key':s3_key} if s3_key is not None else {'items':items})
     def job(self,job_id:str):return self._request(f'/api/v1/jobs/{job_id}')

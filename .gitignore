@@ -16,3 +16,7 @@ node_modules
 
 # TypeScript incremental state
 tsconfig.tsbuildinfo
+
+# Generated build output
+aws/cdk.out/
+**/__pycache__/
