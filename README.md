@@ -1,6 +1,6 @@
 # AgentGuard
 
-Inbound prompt-injection and context-integrity firewall for AI agents. The Next.js app runs on Vercel; AWS provides DynamoDB, S3, SQS/Lambda, Secrets Manager, and a required private Fargate activation-probe service.
+Inbound prompt-injection and context-integrity firewall for AI agents. The Next.js app runs on Vercel; optional AWS infrastructure provides DynamoDB, S3, SQS/Lambda, Secrets Manager, and a private Fargate activation-probe service.
 
 **OpenAI Build Week · Developer Tools**
 [Live demo](https://agentguard-jade.vercel.app) · [Python SDK](sdk/python) · [Devpost submission copy](docs/devpost-submission.md) · [Demo script](docs/demo-script.md)
@@ -150,7 +150,13 @@ See `.env.example`. AWS resource names and URLs come from CDK outputs. `OPENAI_S
 
 ## Security architecture
 
-Every scan executes all three detectors concurrently: TypeScript heuristic (35%), OpenAI LLM judge (40%), and private DeBERTa activation probe (25%). Risk `>= 0.62` blocks. API keys are SHA-256 hashed when configured, uploads use five-minute presigned S3 PUTs, SQS has a DLQ, and IAM grants Vercel/Lambda only the resources each needs.
+Every scan executes three signals concurrently: TypeScript heuristic (35%),
+GPT-5.6 semantic judge (40%), and an adversarial probe (25%). Direct
+OpenAI/OpenRouter deployments use a separately prompted probe pass and mark
+the response `degraded`; the full AWS path uses the private DeBERTa activation
+probe. Risk `>= 0.62` blocks. API keys are SHA-256 hashed when configured,
+uploads use five-minute presigned S3 PUTs, SQS has a DLQ, and IAM grants
+Vercel/Lambda only the resources each needs.
 
 ## API
 
