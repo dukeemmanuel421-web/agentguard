@@ -2,8 +2,9 @@ import { GetSecretValueCommand } from '@aws-sdk/client-secrets-manager'
 import { PutCommand } from '@aws-sdk/lib-dynamodb'
 import { nanoid } from 'nanoid'
 import { secrets,dynamo,tables } from '@/lib/aws'
-import { BLOCK_THRESHOLD,DETECTOR_WEIGHTS,type DetectorResult,type Finding,type ScanResult,type TrustLevel } from '@/lib/contracts'
+import { type DetectorResult,type Finding,type ScanResult,type TrustLevel } from '@/lib/contracts'
 import { heuristicDetector,sanitizeText } from '@/lib/detectors/heuristic'
+import { defaultPolicy,evaluatePolicy } from '@/lib/policy'
 
 const cache=new Map<string,{value:string;expires:number}>()
 async function secret(id:string){ const hit=cache.get(id); if(hit&&hit.expires>Date.now()) return hit.value; const out=await secrets.send(new GetSecretValueCommand({SecretId:id})); if(!out.SecretString) throw new Error(`Secret ${id} is empty`); cache.set(id,{value:out.SecretString,expires:Date.now()+300000}); return out.SecretString }
@@ -15,7 +16,7 @@ async function activationProbe(text:string):Promise<DetectorResult>{ const start
 export async function scanText(text:string,source:TrustLevel='UNKNOWN',ownerId='public'):Promise<ScanResult>{
  if(!text.trim()||text.length>50000) throw new Error('Text must contain 1–50,000 characters.')
  const started=Date.now(); const [heuristic,llm,probe]=await Promise.all([Promise.resolve(heuristicDetector(text)),withTimeout(llmJudge(text,source),12000,'LLM judge'),withTimeout(activationProbe(text),15000,'Activation probe')])
- const risk=Number((heuristic.risk*DETECTOR_WEIGHTS.heuristic+llm.risk*DETECTOR_WEIGHTS.llm+probe.risk*DETECTOR_WEIGHTS.probe).toFixed(3)); const detectors={heuristic,llm,probe}; const findings=(Object.entries(detectors) as [string,DetectorResult][]).flatMap(([detector,result])=>result.findings.map(f=>({...f,detector} as Finding))); const result={blocked:risk>=BLOCK_THRESHOLD,risk,sanitized_text:sanitizeText(text),detectors,findings}
- await dynamo.send(new PutCommand({TableName:tables.scans,Item:{id:nanoid(),ownerId,createdAt:new Date().toISOString(),source,risk,blocked:result.blocked,findings,latencyMs:Date.now()-started,textHash:await crypto.subtle.digest('SHA-256',new TextEncoder().encode(text)).then(v=>Buffer.from(v).toString('hex'))}}))
+ const detectors={heuristic,llm,probe}; const decision=evaluatePolicy(text,source,detectors,defaultPolicy); const {risk}=decision; const findings=(Object.entries(detectors) as [string,DetectorResult][]).flatMap(([detector,result])=>result.findings.map(f=>({...f,detector} as Finding))); const policy={id:defaultPolicy.id,name:defaultPolicy.name,version:defaultPolicy.version,threshold:decision.threshold,reason:decision.reason}; const result={blocked:decision.blocked,risk,sanitized_text:sanitizeText(text),detectors,findings,policy}
+ await dynamo.send(new PutCommand({TableName:tables.scans,Item:{id:nanoid(),ownerId,createdAt:new Date().toISOString(),source,risk,blocked:result.blocked,findings,detectors,policy,latencyMs:Date.now()-started,textHash:await crypto.subtle.digest('SHA-256',new TextEncoder().encode(text)).then(v=>Buffer.from(v).toString('hex'))}}))
  return result
 }

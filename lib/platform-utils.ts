@@ -1,0 +1,5 @@
+import { createHmac,timingSafeEqual } from 'node:crypto'
+export function signPayload(secret:string,payload:string,timestamp=Math.floor(Date.now()/1000)){return `t=${timestamp},v1=${createHmac('sha256',secret).update(`${timestamp}.${payload}`).digest('hex')}`}
+export function verifySignature(secret:string,payload:string,header:string,maxAge=300){const parts=Object.fromEntries(header.split(',').map(v=>v.split('=')));if(!parts.t||!parts.v1||Math.abs(Date.now()/1000-Number(parts.t))>maxAge)return false;const expected=createHmac('sha256',secret).update(`${parts.t}.${payload}`).digest('hex');return expected.length===parts.v1.length&&timingSafeEqual(Buffer.from(expected),Buffer.from(parts.v1))}
+export function csvCell(value:unknown){const text=String(value??'');const safe=/^[=+\-@]/.test(text)?`'${text}`:text;return `"${safe.replaceAll('"','""')}"`}
+export function evidence(text:string,snippet:string){const index=text.toLowerCase().indexOf(snippet.toLowerCase());if(index<0)return snippet.slice(0,240);return text.slice(Math.max(0,index-80),Math.min(text.length,index+snippet.length+80))}

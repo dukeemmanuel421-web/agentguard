@@ -13,4 +13,4 @@ export const s3=new S3Client({region,credentials})
 export const sqs=new SQSClient({region,credentials})
 export const secrets=new SecretsManagerClient({region,credentials})
 export const lambda=new LambdaClient({region,credentials})
-export const tables={users:process.env.DYNAMODB_USERS_TABLE!,apiKeys:process.env.DYNAMODB_API_KEYS_TABLE!,scans:process.env.DYNAMODB_SCANS_TABLE!,usage:process.env.DYNAMODB_USAGE_TABLE!,auth:process.env.DYNAMODB_AUTH_TABLE!}
+export const tables={users:process.env.DYNAMODB_USERS_TABLE!,apiKeys:process.env.DYNAMODB_API_KEYS_TABLE!,scans:process.env.DYNAMODB_SCANS_TABLE!,usage:process.env.DYNAMODB_USAGE_TABLE!,auth:process.env.DYNAMODB_AUTH_TABLE!,platform:process.env.DYNAMODB_PLATFORM_TABLE!}

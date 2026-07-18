@@ -1,0 +1,1208 @@
+{
+  "/AgentGuardStack": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/ProbeUrl": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ProbeUrl"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:4:1263)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/VercelRoleArn": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VercelRoleArn"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:4:1315)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/Bucket": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "Bucket"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:4:1382)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/QueueUrl": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "QueueUrl"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:4:1441)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/UsersTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UsersTable"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:4:1649)",
+        "Array.forEach (:)",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:4:1632)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/ApiKeysTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ApiKeysTable"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:4:1649)",
+        "Array.forEach (:)",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:4:1632)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/ScansTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ScansTable"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:4:1649)",
+        "Array.forEach (:)",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:4:1632)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/UsageTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UsageTable"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:4:1649)",
+        "Array.forEach (:)",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:4:1632)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/AuthTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthTable"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:4:1649)",
+        "Array.forEach (:)",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:4:1632)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/PlatformTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PlatformTable"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:4:1649)",
+        "Array.forEach (:)",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:4:1632)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "....pnpm...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/AgentGuardStack/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "....pnpm...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/AgentGuardStack/Users/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "Users0A0EEA89"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Table2 in .pnpm...",
+        "table (/vercel/share/v0-project/aws/iac/stack.ts:2:166)",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:2:381)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/ApiKeys/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ApiKeys3BB3983D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Table2 in .pnpm...",
+        "table (/vercel/share/v0-project/aws/iac/stack.ts:2:166)",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:2:407)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/Scans/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "Scans941C181C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Table2 in .pnpm...",
+        "table (/vercel/share/v0-project/aws/iac/stack.ts:2:166)",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:2:561)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/Usage/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "Usage04F2BA28"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Table2 in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:2:768)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/Auth/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthC256A5EC"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Table2 in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:2:1019)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/Platform/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PlatformDD5CC455"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Table2 in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:2:1437)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/Inputs/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "InputsECF79824"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Bucket2 in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:2:1867)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/BatchDLQ/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BatchDLQ99677C2E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Queue2 in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:2:2067)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/BatchQueue/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BatchQueue28C25975"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Queue2 in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:2:2155)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/OpenAIKey/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "OpenAIKeyDF28CBE2"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Secret2 in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:2:2334)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/ProbeToken/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ProbeTokenC3340632"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Secret2 in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:2:2395)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/Vpc/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "Vpc8378EB38"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:3:11)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/Vpc/IGW": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcIGWD7BA715C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:3:11)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/Vpc/VPCGW": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcVPCGWBF912B6E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:3:11)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/Cluster/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ClusterEB0386A7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Cluster2 in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:3:74)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/Probe/LoadBalancerDNS": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ProbeLoadBalancerDNSAFF6F7DC"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new ApplicationLoadBalancedFargateService2 in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:3:147)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/Probe/ServiceURL": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ProbeServiceURL1BD3CA40"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new ApplicationLoadBalancedFargateService2 in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:3:147)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/Probe/Service": [
+    {
+      "type": "aws:cdk:warning",
+      "data": "Enable the 'circuitBreaker' property to trigger a quicker deployment failure if tasks are failing to come start (without this setting deployments may take up to 3 hours to fail). [ack: @aws-cdk/aws-ecs:shouldUseCircuitBreaker]",
+      "trace": [
+        "Annotations.addMessage (/vercel/share/v0-project/node_modules/.pnpm/aws-cdk-lib@2.261.0_constructs@10.7.0/node_modules/aws-cdk-lib/core/lib/annotations.js:1:3441)",
+        "Annotations.addWarningV2 (/vercel/share/v0-project/node_modules/.pnpm/aws-cdk-lib@2.261.0_constructs@10.7.0/node_modules/aws-cdk-lib/core/lib/annotations.js:1:2129)",
+        "new BaseService2 (/vercel/share/v0-project/node_modules/.pnpm/aws-cdk-lib@2.261.0_constructs@10.7.0/node_modules/aws-cdk-lib/aws-ecs/lib/base/base-service.js:1:14671)",
+        "new BaseService2 (/vercel/share/v0-project/node_modules/.pnpm/aws-cdk-lib@2.261.0_constructs@10.7.0/node_modules/aws-cdk-lib/core/lib/no-box-stack-traces.js:1:345)",
+        "new FargateService2 (/vercel/share/v0-project/node_modules/.pnpm/aws-cdk-lib@2.261.0_constructs@10.7.0/node_modules/aws-cdk-lib/aws-ecs/lib/fargate/fargate-service.js:1:7829)",
+        "new FargateService2 (/vercel/share/v0-project/node_modules/.pnpm/aws-cdk-lib@2.261.0_constructs@10.7.0/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:855)",
+        "new ApplicationLoadBalancedFargateService2 (/vercel/share/v0-project/node_modules/.pnpm/aws-cdk-lib@2.261.0_constructs@10.7.0/node_modules/aws-cdk-lib/aws-ecs-patterns/lib/fargate/application-load-balanced-fargate-service.js:1:7416)",
+        "new ApplicationLoadBalancedFargateService2 (/vercel/share/v0-project/node_modules/.pnpm/aws-cdk-lib@2.261.0_constructs@10.7.0/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:855)",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:3:147)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "Object.<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "Module._compile (node:internal/modules/cjs/loader:1812:14)",
+        "Object.transformer (/vercel/share/v0-project/node_modules/.pnpm/tsx@4.23.1/node_modules/tsx/dist/register-BoI6-WNn.cjs:9:3252)",
+        "Module.load (node:internal/modules/cjs/loader:1533:32)",
+        "Module._load (node:internal/modules/cjs/loader:1335:12)",
+        "wrapModuleLoad (node:internal/modules/cjs/loader:255:19)",
+        "loadCJSModuleWithModuleLoad (node:internal/modules/esm/translators:328:3)",
+        "ModuleWrap.<anonymous> (node:internal/modules/esm/translators:233:7)",
+        "ModuleJob.run (node:internal/modules/esm/module_job:430:25)",
+        "async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:661:26)",
+        "async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)"
+      ]
+    },
+    {
+      "type": "aws:cdk:warning",
+      "data": "minHealthyPercent has not been configured so the default value of 50% is used. The number of running tasks will decrease below the desired count during deployments etc. See https://github.com/aws/aws-cdk/issues/31705 [ack: @aws-cdk/aws-ecs:minHealthyPercent]",
+      "trace": [
+        "Annotations.addMessage (/vercel/share/v0-project/node_modules/.pnpm/aws-cdk-lib@2.261.0_constructs@10.7.0/node_modules/aws-cdk-lib/core/lib/annotations.js:1:3441)",
+        "Annotations.addWarningV2 (/vercel/share/v0-project/node_modules/.pnpm/aws-cdk-lib@2.261.0_constructs@10.7.0/node_modules/aws-cdk-lib/core/lib/annotations.js:1:2129)",
+        "new BaseService2 (/vercel/share/v0-project/node_modules/.pnpm/aws-cdk-lib@2.261.0_constructs@10.7.0/node_modules/aws-cdk-lib/aws-ecs/lib/base/base-service.js:1:16295)",
+        "new BaseService2 (/vercel/share/v0-project/node_modules/.pnpm/aws-cdk-lib@2.261.0_constructs@10.7.0/node_modules/aws-cdk-lib/core/lib/no-box-stack-traces.js:1:345)",
+        "new FargateService2 (/vercel/share/v0-project/node_modules/.pnpm/aws-cdk-lib@2.261.0_constructs@10.7.0/node_modules/aws-cdk-lib/aws-ecs/lib/fargate/fargate-service.js:1:7829)",
+        "new FargateService2 (/vercel/share/v0-project/node_modules/.pnpm/aws-cdk-lib@2.261.0_constructs@10.7.0/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:855)",
+        "new ApplicationLoadBalancedFargateService2 (/vercel/share/v0-project/node_modules/.pnpm/aws-cdk-lib@2.261.0_constructs@10.7.0/node_modules/aws-cdk-lib/aws-ecs-patterns/lib/fargate/application-load-balanced-fargate-service.js:1:7416)",
+        "new ApplicationLoadBalancedFargateService2 (/vercel/share/v0-project/node_modules/.pnpm/aws-cdk-lib@2.261.0_constructs@10.7.0/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:855)",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:3:147)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "Object.<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "Module._compile (node:internal/modules/cjs/loader:1812:14)",
+        "Object.transformer (/vercel/share/v0-project/node_modules/.pnpm/tsx@4.23.1/node_modules/tsx/dist/register-BoI6-WNn.cjs:9:3252)",
+        "Module.load (node:internal/modules/cjs/loader:1533:32)",
+        "Module._load (node:internal/modules/cjs/loader:1335:12)",
+        "wrapModuleLoad (node:internal/modules/cjs/loader:255:19)",
+        "loadCJSModuleWithModuleLoad (node:internal/modules/esm/translators:328:3)",
+        "ModuleWrap.<anonymous> (node:internal/modules/esm/translators:233:7)",
+        "ModuleJob.run (node:internal/modules/esm/module_job:430:25)",
+        "async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:661:26)",
+        "async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)"
+      ]
+    }
+  ],
+  "/AgentGuardStack/VpcLink/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcLink42ED6FF0"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new VpcLink2 in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:3:894)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/ProbeApi/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ProbeApiC720E103"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new HttpApi2 in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:3:946)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/BatchLambda/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BatchLambda8451BCF5"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:4:10)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/VercelRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VercelRoleE8428D35"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Role2 in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:4:740)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "....pnpm, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/AgentGuardStack/Inputs/Policy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "InputsPolicy9B724694"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Bucket2 in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:2:1867)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)"
+      ]
+    }
+  ],
+  "/AgentGuardStack/Vpc/PublicSubnet1/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcPublicSubnet1Subnet5C2D37C4"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../vercel/share/v0-project/node_modules/.pnpm/aws-cdk-lib@2.261.0_constructs@10.7.0/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:268 in .pnpm...",
+        "Array.forEach (:)",
+        "....pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/Vpc/PublicSubnet1/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcPublicSubnet1RouteTable6C95E38E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../vercel/share/v0-project/node_modules/.pnpm/aws-cdk-lib@2.261.0_constructs@10.7.0/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:268 in .pnpm...",
+        "Array.forEach (:)",
+        "....pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/Vpc/PublicSubnet1/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcPublicSubnet1RouteTableAssociation97140677"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../vercel/share/v0-project/node_modules/.pnpm/aws-cdk-lib@2.261.0_constructs@10.7.0/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:268 in .pnpm...",
+        "Array.forEach (:)",
+        "....pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/Vpc/PublicSubnet1/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcPublicSubnet1DefaultRoute3DA9E72A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../vercel/share/v0-project/node_modules/.pnpm/aws-cdk-lib@2.261.0_constructs@10.7.0/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:208 in .pnpm...",
+        "Array.forEach (:)",
+        "...new Vpc2 in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:3:11)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/Vpc/PublicSubnet1/EIP": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcPublicSubnet1EIPD7E02669"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:3:11)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/Vpc/PublicSubnet1/NATGateway": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcPublicSubnet1NATGateway4D7517AA"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:3:11)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/Vpc/PublicSubnet2/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcPublicSubnet2Subnet691E08A3"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../vercel/share/v0-project/node_modules/.pnpm/aws-cdk-lib@2.261.0_constructs@10.7.0/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:268 in .pnpm...",
+        "Array.forEach (:)",
+        "....pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/Vpc/PublicSubnet2/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcPublicSubnet2RouteTable94F7E489"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../vercel/share/v0-project/node_modules/.pnpm/aws-cdk-lib@2.261.0_constructs@10.7.0/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:268 in .pnpm...",
+        "Array.forEach (:)",
+        "....pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/Vpc/PublicSubnet2/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcPublicSubnet2RouteTableAssociationDD5762D8"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../vercel/share/v0-project/node_modules/.pnpm/aws-cdk-lib@2.261.0_constructs@10.7.0/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:268 in .pnpm...",
+        "Array.forEach (:)",
+        "....pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/Vpc/PublicSubnet2/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcPublicSubnet2DefaultRoute97F91067"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../vercel/share/v0-project/node_modules/.pnpm/aws-cdk-lib@2.261.0_constructs@10.7.0/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:208 in .pnpm...",
+        "Array.forEach (:)",
+        "...new Vpc2 in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:3:11)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/Vpc/PrivateSubnet1/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcPrivateSubnet1Subnet536B997A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../vercel/share/v0-project/node_modules/.pnpm/aws-cdk-lib@2.261.0_constructs@10.7.0/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:270 in .pnpm...",
+        "Array.forEach (:)",
+        "....pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/Vpc/PrivateSubnet1/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcPrivateSubnet1RouteTableB2C5B500"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../vercel/share/v0-project/node_modules/.pnpm/aws-cdk-lib@2.261.0_constructs@10.7.0/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:270 in .pnpm...",
+        "Array.forEach (:)",
+        "....pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/Vpc/PrivateSubnet1/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcPrivateSubnet1RouteTableAssociation70C59FA6"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../vercel/share/v0-project/node_modules/.pnpm/aws-cdk-lib@2.261.0_constructs@10.7.0/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:270 in .pnpm...",
+        "Array.forEach (:)",
+        "....pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/Vpc/PrivateSubnet1/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcPrivateSubnet1DefaultRouteBE02A9ED"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:3:11)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)"
+      ]
+    }
+  ],
+  "/AgentGuardStack/Vpc/PrivateSubnet2/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcPrivateSubnet2Subnet3788AAA1"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../vercel/share/v0-project/node_modules/.pnpm/aws-cdk-lib@2.261.0_constructs@10.7.0/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:270 in .pnpm...",
+        "Array.forEach (:)",
+        "....pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/Vpc/PrivateSubnet2/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcPrivateSubnet2RouteTableA678073B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../vercel/share/v0-project/node_modules/.pnpm/aws-cdk-lib@2.261.0_constructs@10.7.0/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:270 in .pnpm...",
+        "Array.forEach (:)",
+        "....pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/Vpc/PrivateSubnet2/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcPrivateSubnet2RouteTableAssociationA89CAD56"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../vercel/share/v0-project/node_modules/.pnpm/aws-cdk-lib@2.261.0_constructs@10.7.0/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:270 in .pnpm...",
+        "Array.forEach (:)",
+        "....pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/Vpc/PrivateSubnet2/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcPrivateSubnet2DefaultRoute060D2087"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:3:11)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)"
+      ]
+    }
+  ],
+  "/AgentGuardStack/Probe/LB/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ProbeLBC5063774"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new ApplicationLoadBalancedFargateService2 in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:3:147)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/Probe/TaskDef/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ProbeTaskDefEDBC9BFE"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new ApplicationLoadBalancedFargateService2 in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:3:147)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/Probe/Service/Service": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ProbeServiceFB04AD3E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new ApplicationLoadBalancedFargateService2 in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:3:147)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/ProbeApi/DefaultStage/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ProbeApiDefaultStageA1DA4231"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new HttpApi2 in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:3:946)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/ProbeApi/ANY--{proxy+}/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ProbeApiANYproxy3634C578"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../vercel/share/v0-project/node_modules/.pnpm/aws-cdk-lib@2.261.0_constructs@10.7.0/node_modules/aws-cdk-lib/aws-apigatewayv2/lib/http/api.js:1:96 in .pnpm...",
+        "Array.map (:)",
+        "...WrappedClass.<anonymous> in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:3:987)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/BatchLambda/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BatchLambdaServiceRole2628E021"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:4:10)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/BatchLambda/SqsEventSource:AgentGuardStackBatchQueue5D3D3457/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BatchLambdaSqsEventSourceAgentGuardStackBatchQueue5D3D3457F4BDE16F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addEventSource in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:4:386)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/VercelRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VercelRoleDefaultPolicy77548288"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "....pnpm...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/AgentGuardStack/Probe/LB/SecurityGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ProbeLBSecurityGroupB5EDBCCC"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new ApplicationLoadBalancedFargateService2 in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:3:147)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)"
+      ]
+    }
+  ],
+  "/AgentGuardStack/Probe/LB/SecurityGroup/to AgentGuardStackProbeServiceSecurityGroupE0DEF15B:8080": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ProbeLBSecurityGrouptoAgentGuardStackProbeServiceSecurityGroupE0DEF15B8080DB2C6B34"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "....pnpm...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/AgentGuardStack/Probe/LB/PublicListener/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ProbeLBPublicListener82DFD347"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "....pnpm...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/AgentGuardStack/Probe/TaskDef/TaskRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ProbeTaskDefTaskRole393F5078"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new ApplicationLoadBalancedFargateService2 in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:3:147)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)"
+      ]
+    }
+  ],
+  "/AgentGuardStack/Probe/TaskDef/ExecutionRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ProbeTaskDefExecutionRoleAFCF5E81"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "....pnpm...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/AgentGuardStack/Probe/Service/SecurityGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ProbeServiceSecurityGroup7804A926"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new ApplicationLoadBalancedFargateService2 in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:3:147)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)"
+      ]
+    }
+  ],
+  "/AgentGuardStack/Probe/Service/SecurityGroup/from AgentGuardStackProbeLBSecurityGroupB16DC2D0:8080": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ProbeServiceSecurityGroupfromAgentGuardStackProbeLBSecurityGroupB16DC2D080807E68408E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "....pnpm...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/AgentGuardStack/ProbeApi/ANY--{proxy+}/AlbIntegration/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ProbeApiANYproxyAlbIntegration72A5D5F0"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../vercel/share/v0-project/node_modules/.pnpm/aws-cdk-lib@2.261.0_constructs@10.7.0/node_modules/aws-cdk-lib/aws-apigatewayv2/lib/http/api.js:1:96 in .pnpm...",
+        "Array.map (:)",
+        "...WrappedClass.<anonymous> in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:3:987)"
+      ]
+    }
+  ],
+  "/AgentGuardStack/BatchLambda/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BatchLambdaServiceRoleDefaultPolicy79B86E5F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "....pnpm...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/AgentGuardStack/Probe/LB/PublicListener/ECSGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ProbeLBPublicListenerECSGroupDBB6703F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new ApplicationLoadBalancedFargateService2 in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:3:147)"
+      ]
+    }
+  ],
+  "/AgentGuardStack/Probe/TaskDef/web/LogGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ProbeTaskDefwebLogGroup80D8EEC5"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "....pnpm...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/AgentGuardStack/Probe/TaskDef/ExecutionRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ProbeTaskDefExecutionRoleDefaultPolicy475518BB"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "....pnpm...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/AgentGuardStack/Probe/Service/TaskCount/Target/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ProbeServiceTaskCountTarget66BBCBF7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.autoScaleTaskCount in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:3:769)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AgentGuardStack/Probe/Service/TaskCount/Target/CpuScale/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ProbeServiceTaskCountTargetCpuScaleA529016A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...ScalableTaskCount.scaleOnCpuUtilization in .pnpm...",
+        "new AgentGuardStack (/vercel/share/v0-project/aws/iac/stack.ts:3:819)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:25)",
+        "<anonymous> (/vercel/share/v0-project/aws/iac/stack.ts:5:152)",
+        "...node internals, .pnpm..."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "version": "54.0.0",
+  "files": {
+    "0f6032b588091be85fe8e2fd2ad990f7ee87fd4392580a7deefb3f8ea0a6890f": {
+      "displayName": "BatchLambda/Code",
+      "source": {
+        "path": "asset.0f6032b588091be85fe8e2fd2ad990f7ee87fd4392580a7deefb3f8ea0a6890f",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "current_account-us-east-1-5715421c": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-us-east-1",
+          "objectKey": "0f6032b588091be85fe8e2fd2ad990f7ee87fd4392580a7deefb3f8ea0a6890f.zip",
+          "region": "us-east-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-us-east-1"
+        }
+      }
+    },
+    "554612d77571e686101a88617875a60289f57d67baf02d2d766f890ed11342ba": {
+      "displayName": "AgentGuardStack Template",
+      "source": {
+        "path": "AgentGuardStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-us-east-1-bcd25131": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-us-east-1",
+          "objectKey": "554612d77571e686101a88617875a60289f57d67baf02d2d766f890ed11342ba.json",
+          "region": "us-east-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-us-east-1"
+        }
+      }
+    }
+  },
+  "dockerImages": {
+    "7062da79d2944e8218656e1af9bd25130c6c12c09f9e625789abb8e7a241e022": {
+      "displayName": "Probe/TaskDef/web/AssetImage",
+      "source": {
+        "directory": "asset.7062da79d2944e8218656e1af9bd25130c6c12c09f9e625789abb8e7a241e022"
+      },
+      "destinations": {
+        "current_account-us-east-1-3dc15c89": {
+          "repositoryName": "cdk-hnb659fds-container-assets-${AWS::AccountId}-us-east-1",
+          "imageTag": "7062da79d2944e8218656e1af9bd25130c6c12c09f9e625789abb8e7a241e022",
+          "region": "us-east-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-image-publishing-role-${AWS::AccountId}-us-east-1"
+        }
+      }
+    }
+  }
+}
