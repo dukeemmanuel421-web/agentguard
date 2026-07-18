@@ -140,13 +140,38 @@ verification, local linking, and fail-closed behavior.
 ## Deploy
 
 1. Configure AWS credentials locally, then deploy `aws/` with CDK: `cd aws && pnpm install && pnpm deploy -c vercelTeam=TEAM_ID -c vercelProject=PROJECT_ID`.
-2. Put the OpenAI key in the generated `OpenAIKey` secret. The probe token is generated and injected into ECS automatically.
-3. Copy the stack outputs into Vercel project variables using `.env.example` as the complete list. `AWS_ROLE_ARN` is the stack's Vercel OIDC role, so no long-lived AWS access key is required.
-4. Deploy the Next.js project to Vercel. The Fargate probe must be healthy and running for scans to work; scans fail closed when the probe or LLM judge is unavailable.
+2. The DeBERTa image is pinned to an immutable Hugging Face revision. CDK generates the probe token, stores it in Secrets Manager, and injects it into Fargate.
+3. Set `AWS_ROLE_ARN` from `VercelRoleArn`, `PROBE_SERVICE_URL` from `ProbeUrl`, and `PROBE_TOKEN_SECRET_ID` from `ProbeTokenSecretArn` in Vercel. Keep `PROVIDER_MODE=openrouter` and `OPENROUTER_API_KEY` for the GPT-5.6 semantic judge.
+4. Redeploy Vercel and verify scan provenance contains `semantic` and `activation-probe` with `degraded: false`.
+
+The full stack creates a NAT gateway, private load balancer, API Gateway VPC
+Link, and a 2-vCPU/4-GB Fargate task. Review AWS pricing before deployment.
+Set `-c probeDesiredCount=2` or higher for multi-AZ capacity. The generated
+`OpenAIKey` secret is only required when using the AWS-backed OpenAI judge or
+batch Lambda.
+
+To deploy only the probe on another container platform:
+
+```bash
+docker build -t agentguard-probe aws/probe-service
+docker run -p 8080:8080 \
+  -e PROBE_INTERNAL_TOKEN="$(openssl rand -hex 32)" \
+  agentguard-probe
+```
+
+Expose it through HTTPS, then set the same token as `PROBE_SERVICE_TOKEN` and
+its public base URL as `PROBE_SERVICE_URL` in Vercel. The service image embeds
+the pinned model weights, so runtime startup does not depend on Hugging Face.
 
 ## Environment variables
 
-See `.env.example`. AWS resource names and URLs come from CDK outputs. `OPENAI_SECRET_ID` and `PROBE_TOKEN_SECRET_ID` are Secrets Manager ARNs, never secret values. `PROBE_SERVICE_URL` is the API Gateway URL backed by VPC Link and the private ALB. `API_RATE_LIMIT_PER_MINUTE` controls per-key DynamoDB conditional rate limits.
+See `.env.example`. AWS resource names and URLs come from CDK outputs.
+`OPENAI_SECRET_ID` and `PROBE_TOKEN_SECRET_ID` are Secrets Manager ARNs, never
+secret values. `PROBE_SERVICE_TOKEN` is available for non-AWS probe deployments
+that inject a token directly, but the Secrets Manager path is preferred.
+`PROBE_SERVICE_URL` is the API Gateway URL backed by VPC Link and the private
+ALB. `API_RATE_LIMIT_PER_MINUTE` controls per-key DynamoDB conditional rate
+limits.
 
 ## Security architecture
 
