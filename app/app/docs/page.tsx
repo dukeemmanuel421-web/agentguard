@@ -40,6 +40,8 @@ pnpm build && pnpm pack
 openclaw plugins install \\
   npm-pack:./agentguard-openclaw-0.1.0.tgz --force
 openclaw plugins enable agentguard
+openclaw config set \\
+  plugins.entries.agentguard.hooks.allowConversationAccess true
 openclaw gateway restart`
 
 export default function Docs(){

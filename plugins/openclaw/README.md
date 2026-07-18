@@ -21,6 +21,7 @@ pnpm pack
 
 openclaw plugins install npm-pack:./agentguard-openclaw-0.1.0.tgz --force
 openclaw plugins enable agentguard
+openclaw config set plugins.entries.agentguard.hooks.allowConversationAccess true
 ```
 
 For plugin development, link the source directory instead:
@@ -28,6 +29,7 @@ For plugin development, link the source directory instead:
 ```bash
 openclaw plugins install --link ./plugins/openclaw
 openclaw plugins enable agentguard
+openclaw config set plugins.entries.agentguard.hooks.allowConversationAccess true
 ```
 
 Restart and verify the running Gateway:
@@ -58,6 +60,9 @@ Plugin settings can also be placed under `plugins.entries.agentguard.config` in
     entries: {
       agentguard: {
         enabled: true,
+        hooks: {
+          allowConversationAccess: true
+        },
         config: {
           baseUrl: "https://agentguard-jade.vercel.app",
           apiKey: "ag_live_...",
@@ -75,6 +80,12 @@ Plugin settings can also be placed under `plugins.entries.agentguard.config` in
 
 Prefer an environment variable or OpenClaw secret reference over committing an
 API key to a configuration file.
+
+`allowConversationAccess` is required for the `before_agent_run` gate because
+it inspects the final prompt before model submission. OpenClaw deliberately
+requires this explicit opt-in for externally installed plugins. Disable
+`scanPrompts` if you do not want to grant prompt access; tool-call and
+tool-result protection can remain enabled independently.
 
 ## Behavior
 
