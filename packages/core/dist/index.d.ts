@@ -1,4 +1,4 @@
-export type TrustLevel = "USER_PROMPT" | "TRUSTED_TOOL" | "TOOL_OUTPUT" | "WEB_PAGE" | "DOCUMENT" | "MCP_OUTPUT" | "UNKNOWN";
+export type TrustLevel = "USER_PROMPT" | "TRUSTED_TOOL" | "TOOL_CALL" | "TOOL_OUTPUT" | "WEB_PAGE" | "DOCUMENT" | "MCP_OUTPUT" | "UNKNOWN";
 export interface Finding {
     detector: string;
     severity: string;
@@ -14,10 +14,28 @@ export interface ScanResponse {
         reason: string;
     };
 }
+export interface ProviderTrace {
+    provider: "openai" | "openrouter" | "aws";
+    model: string;
+    source: "workspace" | "environment" | "aws";
+    fallback: boolean;
+    signal: "semantic" | "inferred-probe" | "activation-probe";
+}
 export interface ActionDecision {
     allowed: boolean;
     risk: number;
     reason: string;
+    findings?: Finding[];
+    policy?: {
+        id: string;
+        name: string;
+        version: number;
+        threshold: number;
+        reason: string;
+    };
+    provenance?: ProviderTrace[];
+    degraded?: boolean;
+    trace_id?: string;
 }
 export interface CheckActionInput {
     tool_call: Record<string, unknown>;

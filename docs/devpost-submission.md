@@ -91,3 +91,17 @@ submit a fabricated session ID.
 - [ ] Re-check eligibility and the official rules before submission.
 
 **Public demo video:** `REPLACE_WITH_YOUTUBE_URL`
+
+
+### Codex validation update
+
+Codex re-checked the core trust boundaries and tightened the pre-execution tool-call path so `/api/v1/check-action` is evaluated as `TOOL_CALL` content, returns trace ID, policy, provenance, and degraded-state metadata, and keeps the unsupported-reasoning fail-closed risk bump. Codex also added Python SDK pytest discovery through `pyproject.toml` so the SDK tests run from the package directory without requiring an editable install.
+
+Important decisions:
+- Tool calls are now a first-class trust boundary rather than being labeled as post-tool output.
+- Progress streaming remains verdict-free until the final document result to avoid early allow decisions.
+- Provider credentials and live deployment claims remain external blockers when keys are absent; benchmark and deployment success should only be reported from real runs.
+
+Alternatives considered and rejected:
+- Treating proposed tool calls as `TOOL_OUTPUT` was rejected because it hides an important pre-side-effect boundary.
+- Returning partial allow decisions during document streaming was rejected because fail-closed aggregation must see every overlapping chunk.
