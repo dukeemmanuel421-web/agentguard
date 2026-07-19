@@ -1,4 +1,4 @@
-export const trustLevels = ['USER_PROMPT','TRUSTED_TOOL','TOOL_OUTPUT','WEB_PAGE','DOCUMENT','MCP_OUTPUT','UNKNOWN'] as const
+export const trustLevels = ['USER_PROMPT','TRUSTED_TOOL','TOOL_CALL','TOOL_OUTPUT','WEB_PAGE','DOCUMENT','MCP_OUTPUT','UNKNOWN'] as const
 export type TrustLevel = (typeof trustLevels)[number]
 export type Severity = 'low'|'medium'|'high'|'critical'
 export type Finding = { detector:string; severity:Severity; snippet:string; reason:string }
