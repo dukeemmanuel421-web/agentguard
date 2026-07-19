@@ -248,7 +248,7 @@ Vercel/Lambda only the resources each needs.
 - `POST /api/v1/uploads`
 - `GET /api/v1/examples`
 
-Developer endpoints accept `Authorization: Bearer ag_live_...` when API keys are configured. The console and playground are publicly accessible; production teams should place additional abuse controls in front of public traffic.
+AgentGuard supports a keyless demo path and an authenticated production path. `POST /api/v1/scan`, `POST /api/v1/check-action`, `POST /api/v1/scan-document`, and `POST /api/v1/scan-document/stream` work without an AgentGuard API key and use the shared `public` workspace unless an `Authorization: Bearer ag_live_...` header is supplied. Batch jobs, upload URLs, and job result retrieval require API keys because they write or read tenant-scoped AWS resources. The console and playground are publicly accessible; production teams should place additional abuse controls in front of public traffic. If the console says **API key storage is not configured**, the keyless scan/action demo can still work, but key creation is disabled because the deployment is missing `DYNAMODB_API_KEYS_TABLE`; copy the `ApiKeysTable` CDK output into that environment variable, set `AWS_REGION` and Vercel `AWS_ROLE_ARN` when using OIDC, then redeploy or restart the app.
 
 ## Non-goals
 
