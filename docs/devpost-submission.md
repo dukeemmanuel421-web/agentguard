@@ -95,7 +95,7 @@ submit a fabricated session ID.
 
 ### Codex validation update
 
-Codex re-checked the core trust boundaries and tightened the pre-execution tool-call path so `/api/v1/check-action` is evaluated as `TOOL_CALL` content, returns policy/provenance/degraded-state metadata, and keeps the unsupported-reasoning fail-closed risk bump. Codex also added Python SDK pytest discovery through `pyproject.toml` so the SDK tests run from the package directory without requiring an editable install.
+Codex re-checked the core trust boundaries and tightened the pre-execution tool-call path so `/api/v1/check-action` is evaluated as `TOOL_CALL` content, returns trace ID, policy, provenance, and degraded-state metadata, and keeps the unsupported-reasoning fail-closed risk bump. Codex also added Python SDK pytest discovery through `pyproject.toml` so the SDK tests run from the package directory without requiring an editable install.
 
 Important decisions:
 - Tool calls are now a first-class trust boundary rather than being labeled as post-tool output.

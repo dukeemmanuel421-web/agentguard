@@ -28,8 +28,9 @@ describe('check-action route', () => {
     const payload = await response.json()
 
     expect(response.status).toBe(200)
-    expect(scanText).toHaveBeenCalledWith(expect.stringContaining('PROPOSED TOOL CALL'), 'TOOL_CALL', 'public')
-    expect(payload).toMatchObject({ allowed: true, degraded: false })
+    expect(scanText).toHaveBeenCalledWith(expect.stringContaining('PROPOSED TOOL CALL'), 'TOOL_CALL', 'public', expect.any(String))
+    expect(payload).toMatchObject({ allowed: true, degraded: false, trace_id: expect.any(String) })
+    expect(response.headers.get('x-agentguard-trace-id')).toBe(payload.trace_id)
     expect(payload.provenance).toHaveLength(1)
   })
 

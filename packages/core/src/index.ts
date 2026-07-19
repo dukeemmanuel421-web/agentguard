@@ -23,10 +23,23 @@ export interface ScanResponse {
   policy?: { reason: string };
 }
 
+export interface ProviderTrace {
+  provider: "openai" | "openrouter" | "aws";
+  model: string;
+  source: "workspace" | "environment" | "aws";
+  fallback: boolean;
+  signal: "semantic" | "inferred-probe" | "activation-probe";
+}
+
 export interface ActionDecision {
   allowed: boolean;
   risk: number;
   reason: string;
+  findings?: Finding[];
+  policy?: { id: string; name: string; version: number; threshold: number; reason: string };
+  provenance?: ProviderTrace[];
+  degraded?: boolean;
+  trace_id?: string;
 }
 
 export interface CheckActionInput {

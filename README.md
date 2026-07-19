@@ -176,7 +176,7 @@ Configure `AUTH_SECRET`, `NEXTAUTH_URL`, `GMAIL_USER`, `GMAIL_APP_PASSWORD`, and
 ## Webhooks and tracing
 
 Authenticated workspaces can register SSRF-validated HTTPS webhooks for blocked,
-elevated, and degraded scans. Scan and action-check responses include detector provenance plus degraded-state fields so a client can distinguish a true DeBERTa activation probe from a same-provider inferred-probe fallback. Scan responses include
+elevated, and degraded scans. Scan and action-check responses include trace identifiers, detector provenance, and degraded-state fields so a client can distinguish a true DeBERTa activation probe from a same-provider inferred-probe fallback. Scan responses include
 `X-AgentGuard-Trace-Id`; signed delivery runs through SQS/Lambda with bounded
 retries and DynamoDB delivery records. Set `SQS_WEBHOOK_QUEUE_URL` from the CDK
 `WebhookQueueUrl` output.
