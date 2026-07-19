@@ -182,20 +182,6 @@ Alternatives considered and rejected:
 - Treating proposed tool calls as `TOOL_OUTPUT` was rejected because it hides an important pre-side-effect boundary.
 - Returning partial allow decisions during document streaming was rejected because fail-closed aggregation must see every overlapping chunk.
 
-## Devpost Additional info answers
-
-Use this judge-only section for the Devpost **Additional info** page. Do not paste
-placeholder values for identity or `/feedback`; use only the real values from the
-submitter account and Codex session.
-
-### Submitter Type
-
-Individual / solo builder, unless you are submitting with teammates.
-
-### Country of Residence
-
-Select your actual country of residence from the Devpost list. This must match
-the official rules and should not be guessed by the project documentation.
 
 ### Category
 
