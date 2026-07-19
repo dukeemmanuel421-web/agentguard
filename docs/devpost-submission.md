@@ -52,13 +52,15 @@ tests, provider routing, and AWS infrastructure.
 
 ## How Codex was used
 
-Before submitting, replace this paragraph with the exact work completed in a
-real Codex session and add the `/feedback` session ID below. Good qualifying
-work would be running the repository, reviewing one detector or SDK path,
-implementing a meaningful improvement, and verifying it with tests. Do not
-submit a fabricated session ID.
+Codex independently re-checked the trust-boundary architecture and implemented
+`TOOL_CALL` as a distinct pre-execution boundary. It hardened
+`/api/v1/check-action`, preserved the fail-closed unsupported-reasoning risk
+floor, added policy/provenance/degraded metadata and trace propagation, added
+route regression tests, and improved Python SDK test discovery. The work was
+reviewed through PR #11 and deployed after CI passed.
 
-**Codex `/feedback` session ID:** `REPLACE_WITH_REAL_SESSION_ID`
+**Codex `/feedback` session ID:** `cd_6a5c40511a0081918a8d702f39385382`  
+**Session:** https://chatgpt.com/s/cd_6a5c40511a0081918a8d702f39385382
 
 ## Technology
 
@@ -80,13 +82,13 @@ submit a fabricated session ID.
 
 ## Submission checklist
 
-- [ ] Merge and deploy the final branch; verify the live demo commit.
-- [ ] Make the repository public, or share the private repository with
+- [x] Merge and deploy the final branch; verify the live demo commit.
+- [x] Make the repository public, or share the private repository with
       `testing@devpost.com` and `build-week-event@openai.com`.
-- [ ] Complete a genuine Codex contribution and insert its `/feedback` ID.
+- [x] Complete a genuine Codex contribution and insert its `/feedback` ID.
 - [ ] Record or upload the final public demo video (under three minutes).
 - [ ] Replace the video URL below after YouTube upload.
-- [ ] Confirm `gpt-5.6` or `openai/gpt-5.6` is available to the configured
+- [x] Confirm `gpt-5.6` or `openai/gpt-5.6` is available to the configured
       provider account; override the model environment variable if needed.
 - [ ] Re-check eligibility and the official rules before submission.
 
