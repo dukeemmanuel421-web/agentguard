@@ -28,6 +28,80 @@ processing on AWS, and a dependency-free Python SDK. It is designed for agent
 developers who need inspectable security evidence rather than another opaque
 moderation label.
 
+## Inspiration
+
+Modern AI agents are becoming powerful because they can read arbitrary context
+and call tools. That same capability creates a new security problem: a malicious
+web page, support ticket, document, MCP response, or tool result can smuggle
+instructions that the agent treats as trusted. AgentGuard was inspired by the
+need for a simple security boundary that developers can place before untrusted
+content reaches model context or triggers side effects.
+
+## What it does
+
+AgentGuard is a framework-neutral, fail-closed inbound prompt-injection firewall
+for AI agents. It scans prompts, retrieved documents, web content, MCP output,
+tool results, and proposed tool calls before they influence an agent. Each scan
+combines deterministic heuristics, a GPT-5.6 semantic judge through the
+configured provider, an optional independent DeBERTa probe, and versioned policy
+evaluation. The result includes an allow/block verdict, risk score, findings,
+sanitized content, detector provenance, degraded-state metadata, and trace IDs
+that developers can audit.
+
+## How we built it
+
+We built AgentGuard as a Next.js and TypeScript application with stable REST
+contracts, a dependency-free Python SDK, JavaScript package sources, adapter
+examples for agent frameworks, and optional AWS CDK infrastructure for batch
+scanning and an activation-probe service. The runtime path separates trust
+boundaries: content before model ingestion uses `/api/v1/scan`, proposed tool
+calls use `/api/v1/check-action` as `TOOL_CALL`, post-tool or retrieval output
+returns through scan, and large documents are scanned in overlapping chunks with
+only a final verdict after all chunks complete. Provider keys stay on the server
+or in encrypted workspace settings.
+
+## Challenges we ran into
+
+The hardest part was avoiding accidental permissive behavior. A detector outage,
+malformed provider response, unsupported tool reasoning trace, or partial
+streaming result should never silently become an allow decision. We also had to
+keep the project usable without forcing authentication for the public demo while
+preserving tenant isolation when `PLATFORM_AUTH_REQUIRED=true`. Another challenge
+was documenting external blockers honestly: live GPT-5.6 judging, optional
+DeBERTa probing, benchmark results, and registry publication all depend on real
+credentials, deployed services, or package ownership.
+
+## Accomplishments that we're proud of
+
+- Implemented a concrete security path with deterministic, semantic, and optional
+  probe evidence feeding versioned policy evaluation.
+- Added a first-class `TOOL_CALL` boundary so proposed actions are reviewed before
+  side effects instead of being confused with post-tool output.
+- Preserved fail-closed semantics and exposed provenance, degraded-state, policy,
+  findings, and trace IDs to make decisions auditable.
+- Shipped SDK and integration paths so developers can protect custom agents,
+  Python apps, REST clients, and framework adapters with the same boundary.
+- Added documentation that separates verified runtime evidence from external
+  credential or deployment blockers.
+
+## What we learned
+
+Prompt-injection defense is less about one perfect classifier and more about
+placing the right boundaries in the agent lifecycle. Scanning must happen before
+context ingestion, before tool execution, and after untrusted retrieval or tool
+output. We also learned that security tooling needs explainable failure modes:
+developers need to know whether a decision came from all configured detectors or
+from a degraded fail-closed path.
+
+## What's next for AgentGuard
+
+Next steps are to run the complete benchmark against the live deployment with
+real provider credentials, expand adapter coverage, publish packages once the
+package scopes are available, improve the policy console, and add richer
+workspace analytics for blocked attacks, false positives, degraded scans, and
+latency. The longer-term goal is to make AgentGuard a drop-in inbound security
+layer for any agent stack that consumes untrusted context or uses tools.
+
 ## What makes it different
 
 - **Inbound rather than output moderation:** it protects model context before
